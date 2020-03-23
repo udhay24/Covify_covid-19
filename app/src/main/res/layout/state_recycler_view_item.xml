@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/state_title_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="serif"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Maharastra" />
+
+    <TextView
+        android:id="@+id/cases_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="16dp"
+        android:text="Cases"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/state_title_text_view"
+        app:layout_constraintTop_toBottomOf="@+id/state_title_text_view" />
+
+    <TextView
+        android:id="@+id/cases_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="0"
+        app:layout_constraintBottom_toBottomOf="@+id/cases_title"
+        app:layout_constraintStart_toEndOf="@+id/cases_title"
+        app:layout_constraintTop_toTopOf="@+id/cases_title"
+        tools:text="400" />
+
+    <TextView
+        android:id="@+id/deaths_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:text="Deaths"
+        app:layout_constraintBottom_toBottomOf="@+id/cases_text_view"
+        app:layout_constraintStart_toEndOf="@+id/cases_text_view"
+        app:layout_constraintTop_toTopOf="@+id/cases_text_view" />
+
+    <TextView
+        android:id="@+id/death_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="0"
+        app:layout_constraintBottom_toBottomOf="@+id/deaths_title"
+        app:layout_constraintStart_toEndOf="@+id/deaths_title"
+        app:layout_constraintTop_toTopOf="@+id/deaths_title"
+        tools:text="98" />
+
+    <ImageView
+        android:id="@+id/detail_button"
+        android:layout_width="24dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_next" />
+</androidx.constraintlayout.widget.ConstraintLayout>

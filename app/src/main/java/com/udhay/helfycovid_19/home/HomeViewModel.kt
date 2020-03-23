@@ -8,7 +8,6 @@ import com.udhay.helfycovid_19.data.model.CountryModel
 import com.udhay.helfycovid_19.data.model.StateModel
 import com.udhay.helfycovid_19.data.model.WorldModel
 import com.udhay.helfycovid_19.util.Resource
-import org.koin.java.KoinJavaComponent.inject
 import java.lang.Exception
 
 class HomeViewModel(
@@ -47,6 +46,4 @@ class HomeViewModel(
             emit(Resource.FailureResponse(Exception(result.errorBody().toString())))
         }
     }
-
-
 }
