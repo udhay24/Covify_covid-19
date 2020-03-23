@@ -1,0 +1,2 @@
+rootProject.name='helfy covid-19'
+include ':app'
