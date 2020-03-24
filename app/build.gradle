@@ -89,5 +89,8 @@ dependencies {
     implementation 'com.diogobernardino:williamchart:3.3.0'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
+    //viewpager
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+
 
 }
