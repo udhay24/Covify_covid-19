@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
-import android.view.View.OnTouchListener
 import android.view.ViewGroup
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
@@ -52,6 +51,10 @@ class HomeFragment : Fragment() {
             }
         })
         displayMap()
+
+        distribution_view_more_text.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_detailCountryFragment)
+        }
     }
 
     private fun updateWorldInfo(worldModel: WorldModel) {

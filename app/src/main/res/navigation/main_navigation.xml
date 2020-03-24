@@ -12,10 +12,18 @@
         <action
             android:id="@+id/action_homeFragment_to_mapDetailFragment"
             app:destination="@id/mapDetailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_detailCountryFragment"
+            app:destination="@id/detailCountryFragment" />
     </fragment>
     <fragment
         android:id="@+id/mapDetailFragment"
         android:name="com.udhay.helfycovid_19.home.MapDetailFragment"
         android:label="fragment_map_detail"
         tools:layout="@layout/fragment_map_detail" />
+    <fragment
+        android:id="@+id/detailCountryFragment"
+        android:name="com.udhay.helfycovid_19.detail_country.DetailCountryFragment"
+        android:label="detail_country_fragment"
+        tools:layout="@layout/detail_country_fragment" />
 </navigation>

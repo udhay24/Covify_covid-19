@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/cases_title"
+                    android:id="@+id/distribution_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
@@ -56,11 +56,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Recovered"
-                    app:layout_constraintBottom_toBottomOf="@+id/cases_title"
+                    app:layout_constraintBottom_toBottomOf="@+id/distribution_title"
                     app:layout_constraintEnd_toStartOf="@+id/deaths_title"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/cases_title"
-                    app:layout_constraintTop_toTopOf="@+id/cases_title" />
+                    app:layout_constraintStart_toEndOf="@+id/distribution_title"
+                    app:layout_constraintTop_toTopOf="@+id/distribution_title" />
 
                 <TextView
                     android:id="@+id/deaths_title"
@@ -80,9 +80,9 @@
                     android:layout_marginTop="24dp"
                     android:text="400"
                     app:layout_constraintBottom_toBottomOf="@+id/recovered_text_view"
-                    app:layout_constraintEnd_toEndOf="@+id/cases_title"
-                    app:layout_constraintStart_toStartOf="@+id/cases_title"
-                    app:layout_constraintTop_toBottomOf="@+id/cases_title" />
+                    app:layout_constraintEnd_toEndOf="@+id/distribution_title"
+                    app:layout_constraintStart_toStartOf="@+id/distribution_title"
+                    app:layout_constraintTop_toBottomOf="@+id/distribution_title" />
 
                 <TextView
                     android:id="@+id/recovered_text_view"
@@ -106,7 +106,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/deaths_title" />
 
                 <TextView
-                    android:id="@+id/textView10"
+                    android:id="@+id/distribution_view_more_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"

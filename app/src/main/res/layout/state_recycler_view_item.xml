@@ -20,7 +20,7 @@
         tools:text="Maharastra" />
 
     <TextView
-        android:id="@+id/cases_title"
+        android:id="@+id/distribution_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -36,9 +36,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:text="0"
-        app:layout_constraintBottom_toBottomOf="@+id/cases_title"
-        app:layout_constraintStart_toEndOf="@+id/cases_title"
-        app:layout_constraintTop_toTopOf="@+id/cases_title"
+        app:layout_constraintBottom_toBottomOf="@+id/distribution_title"
+        app:layout_constraintStart_toEndOf="@+id/distribution_title"
+        app:layout_constraintTop_toTopOf="@+id/distribution_title"
         tools:text="400" />
 
     <TextView
