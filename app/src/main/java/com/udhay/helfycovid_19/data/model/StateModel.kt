@@ -3,7 +3,7 @@ package com.udhay.helfycovid_19.data.model
 class StateModel : ArrayList<StateModel.StateModelItem>(){
     data class StateModelItem(
         val confirmed_cases: Int, // 382
-        val datewise_data: List<Any>,
+        val datewise_data: List<CasesFrequency?>,
         val deaths: Int, // 7
         val hospitalised_cases: Int, // 350
         val icu_cases: Int, // 0
@@ -14,6 +14,11 @@ class StateModel : ArrayList<StateModel.StateModelItem>(){
         val total_testing_facilities: Int, // 60
         val transmission_source: TransmissionSource
     ) {
+        data class CasesFrequency(
+            val confirmed_cases: Int, // 2210
+            val date: String // 1_7_2020
+        )
+
         data class Nationality(
             val foreign: Int, // 41
             val local: Int // 341

@@ -5,24 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.udhay.helfycovid_19.R
-import com.udhay.helfycovid_19.util.Resource
-import kotlinx.android.synthetic.main.detail_country_fragment.*
-import org.koin.android.ext.android.inject
+import kotlinx.android.synthetic.main.graph_fragment.*
 import kotlin.math.abs
 
 
-class DetailCountryFragment : Fragment() {
+class GraphFragment : Fragment() {
 
-    private val dataArgs: DetailCountryFragmentArgs by navArgs()
+    private val dataArgs: GraphFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.detail_country_fragment, container, false)
+        return inflater.inflate(R.layout.graph_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

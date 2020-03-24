@@ -1,5 +1,8 @@
 package com.udhay.helfycovid_19.home
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -10,6 +13,9 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -20,7 +26,7 @@ import kotlinx.android.synthetic.main.home_fragment.*
 import org.koin.android.ext.android.inject
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), StatesRecyclerAdapter.StateClickListener {
 
     private val viewModel: HomeViewModel by inject()
 
@@ -72,14 +78,18 @@ class HomeFragment : Fragment() {
             }
         })
         displayMap()
-
+        checkup_fab.setOnClickListener {
+            val webUrl = "https://covid.apollo247.com/"
+            val builder = CustomTabsIntent.Builder()
+            builder.setToolbarColor(ContextCompat.getColor(this@HomeFragment.requireContext(), R.color.colorPrimary))
+            builder.addDefaultShareMenuItem()
+            builder.setShowTitle(true)
+            builder.setCloseButtonIcon(BitmapFactory.decodeResource(resources, android.R.drawable.ic_menu_close_clear_cancel))
+            builder.setExitAnimations(this@HomeFragment.requireContext(), android.R.anim.fade_in, android.R.anim.fade_out)
+            builder.build().launchUrl(this@HomeFragment.requireContext(), Uri.parse(webUrl))
+        }
 
     }
-
-    private fun updateWorldInfo(worldModel: WorldModel) {
-//        cases_text_view.text = worldModel.
-    }
-
     private fun updateCountryInfo(countryModel: CountryModel) {
         cases_text_view.text = countryModel.confirmed_cases.toString()
         recovered_text_view.text = countryModel.recovered_cases.toString()
@@ -90,7 +100,7 @@ class HomeFragment : Fragment() {
         val worstStates = stateModel
             .sortedBy { it.confirmed_cases }
             .subList(0, 5)
-        states_recycler_view.adapter = StatesRecyclerAdapter(worstStates)
+        states_recycler_view.adapter = StatesRecyclerAdapter(worstStates, this)
     }
 
     private fun displayMap() {
@@ -114,4 +124,25 @@ class HomeFragment : Fragment() {
         }
     }
 
+    override fun stateClicked(state: StateModel.StateModelItem) {
+        val distributionModel = GenericDistributionModel(
+            confirmedCases = state.confirmed_cases,
+            hospitalizedCases = state.hospitalised_cases,
+            icuCases = state.icu_cases,
+            recoveredCases = state.recovered_cases,
+            deaths = state.deaths
+        )
+
+        val timeFrequencyModel = GenericTimeFrequencyModel(
+            state.datewise_data.filterNotNull().map {
+                GenericTimeFrequencyModel.TimeCases(
+                    it.date, it.confirmed_cases
+                )
+            }
+        )
+        val navOptions = HomeFragmentDirections.actionHomeFragmentToDetailCountryFragment(
+            distributionModel, timeFrequencyModel
+        )
+        findNavController().navigate(navOptions)
+    }
 }

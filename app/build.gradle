@@ -87,11 +87,15 @@ dependencies {
 
     //graph for visualization
     implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
-    implementation 'com.diogobernardino:williamchart:3.3.0'
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
     //viewpager
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
+
+    //Fab
+    implementation 'com.github.aniketbhoite:MutativeFab:1.0.8'
+
+    //chrome
+    implementation 'androidx.browser:browser:1.2.0'
 
 
 }

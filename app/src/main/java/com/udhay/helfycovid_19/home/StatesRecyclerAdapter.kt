@@ -12,7 +12,8 @@ import kotlinx.android.synthetic.main.state_recycler_view_item.view.*
 import kotlinx.android.synthetic.main.state_recycler_view_item.view.cases_text_view
 
 class StatesRecyclerAdapter(
-    private val statesList: List<StateModel.StateModelItem>
+    private val statesList: List<StateModel.StateModelItem>,
+    private val stateClickListener: StateClickListener
 ): RecyclerView.Adapter<StatesRecyclerAdapter.StatesViewModel>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StatesViewModel {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.state_recycler_view_item, parent, false)
@@ -32,6 +33,13 @@ class StatesRecyclerAdapter(
                 it.cases_text_view.text = state.confirmed_cases.toString()
                 it.death_text_view.text = state.deaths.toString()
             }
+            view.detail_button.setOnClickListener {
+                stateClickListener.stateClicked(state)
+            }
         }
+    }
+
+    interface StateClickListener {
+        fun stateClicked(state: StateModel.StateModelItem)
     }
 }
