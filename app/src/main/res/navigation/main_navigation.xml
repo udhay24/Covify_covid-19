@@ -25,5 +25,12 @@
         android:id="@+id/detailCountryFragment"
         android:name="com.udhay.helfycovid_19.detail_country.DetailCountryFragment"
         android:label="detail_country_fragment"
-        tools:layout="@layout/detail_country_fragment" />
+        tools:layout="@layout/detail_country_fragment" >
+        <argument
+            android:name="distributionData"
+            app:argType="com.udhay.helfycovid_19.data.model.GenericDistributionModel" />
+        <argument
+            android:name="frequencyModel"
+            app:argType="com.udhay.helfycovid_19.data.model.GenericTimeFrequencyModel" />
+    </fragment>
 </navigation>

@@ -20,10 +20,13 @@ import com.udhay.helfycovid_19.data.model.CountryModel
 import kotlinx.android.synthetic.main.graph_holder.view.*
 import com.anychart.data.Set;
 import com.anychart.enums.*
+import com.udhay.helfycovid_19.data.model.GenericDistributionModel
+import com.udhay.helfycovid_19.data.model.GenericTimeFrequencyModel
 
 
 class GraphRecyclerAdapter(
-    private val data: CountryModel
+    private val distributionModel: GenericDistributionModel,
+    private val timeFrequencyModel: GenericTimeFrequencyModel
 ): RecyclerView.Adapter<GraphRecyclerAdapter.Holder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
@@ -35,15 +38,15 @@ class GraphRecyclerAdapter(
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         if (position == 0) {
-            holder.showCasesDistribution(data)
+            holder.showCasesDistribution(distributionModel)
         } else {
-            holder.showTimelineGraph(data)
+            holder.showTimelineGraph(timeFrequencyModel)
         }
     }
 
     inner class Holder(val view: View): RecyclerView.ViewHolder(view) {
 
-        fun showCasesDistribution(countryData: CountryModel) {
+        fun showCasesDistribution(distributionModel: GenericDistributionModel) {
             val pie = AnyChart.pie()
             APIlib.getInstance().setActiveAnyChartView(view.distribution_pie_chart)
 
@@ -59,11 +62,11 @@ class GraphRecyclerAdapter(
             })
 
             val data: MutableList<DataEntry> = ArrayList()
-            data.add(ValueDataEntry("Confirmed", countryData.confirmed_cases))
-            data.add(ValueDataEntry("hospitalized", countryData.hospitalised_cases))
-            data.add(ValueDataEntry("ICU", countryData.icu_cases))
-            data.add(ValueDataEntry("Recovered", countryData.recovered_cases))
-            data.add(ValueDataEntry("Deaths", countryData.deaths))
+            data.add(ValueDataEntry("Confirmed", distributionModel.confirmedCases))
+            data.add(ValueDataEntry("hospitalized", distributionModel.hospitalizedCases))
+            data.add(ValueDataEntry("ICU", distributionModel.icuCases))
+            data.add(ValueDataEntry("Recovered", distributionModel.icuCases))
+            data.add(ValueDataEntry("Deaths", distributionModel.deaths))
 
             pie.data(data)
 
@@ -82,7 +85,7 @@ class GraphRecyclerAdapter(
         }
 
 
-        fun showTimelineGraph(countryData: CountryModel) {
+        fun showTimelineGraph(timeFrequencyModel: GenericTimeFrequencyModel) {
             val anyChartView = view.distribution_pie_chart
             val cartesian: Cartesian = AnyChart.line()
             cartesian.animation(true)
@@ -97,8 +100,8 @@ class GraphRecyclerAdapter(
             cartesian.xAxis(0).labels().padding(5.0, 5.0, 5.0, 5.0)
             val seriesData: MutableList<DataEntry> = ArrayList()
 
-            countryData.datewise_data.filterNotNull().forEach {
-                seriesData.add(CustomDataEntry(it.date, it.confirmed_cases))
+            timeFrequencyModel.cases.filterNotNull().forEach {
+                seriesData.add(CustomDataEntry(it.date, it.confirmedCases))
             }
             val set: Set = Set.instantiate()
             set.data(seriesData)

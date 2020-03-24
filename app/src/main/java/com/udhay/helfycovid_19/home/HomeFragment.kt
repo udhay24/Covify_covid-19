@@ -14,9 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.udhay.helfycovid_19.R
-import com.udhay.helfycovid_19.data.model.CountryModel
-import com.udhay.helfycovid_19.data.model.StateModel
-import com.udhay.helfycovid_19.data.model.WorldModel
+import com.udhay.helfycovid_19.data.model.*
 import com.udhay.helfycovid_19.util.Resource
 import kotlinx.android.synthetic.main.home_fragment.*
 import org.koin.android.ext.android.inject
@@ -35,9 +33,32 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.countryCount.observe(viewLifecycleOwner, Observer {
-            when(it) {
-                is Resource.SuccessResponse ->  updateCountryInfo(it.body)
+        viewModel.countryCount.observe(viewLifecycleOwner, Observer {countryData ->
+            when(countryData) {
+                is Resource.SuccessResponse ->  {
+                    updateCountryInfo(countryData.body)
+                    distribution_view_more_text.setOnClickListener {
+                        val distributionData = GenericDistributionModel(
+                            confirmedCases = countryData.body.confirmed_cases,
+                            hospitalizedCases = countryData.body.hospitalised_cases,
+                            icuCases = countryData.body.icu_cases,
+                            recoveredCases = countryData.body.recovered_cases,
+                            deaths = countryData.body.deaths
+                        )
+
+                        val frequencyModel = GenericTimeFrequencyModel(
+                            countryData.body.datewise_data.filterNotNull().map {
+                                GenericTimeFrequencyModel.TimeCases(
+                                    it.date, it.confirmed_cases
+                                )
+                            }
+                        )
+                        val navOptions = HomeFragmentDirections.actionHomeFragmentToDetailCountryFragment(
+                            distributionData, frequencyModel
+                        )
+                            findNavController().navigate(navOptions)
+                    }
+                }
                 is Resource.FailureResponse -> Unit//TODO() show error message
                 is Resource.LoadingResponse -> Unit //TODO() show loading message
             }
@@ -52,9 +73,7 @@ class HomeFragment : Fragment() {
         })
         displayMap()
 
-        distribution_view_more_text.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_detailCountryFragment)
-        }
+
     }
 
     private fun updateWorldInfo(worldModel: WorldModel) {

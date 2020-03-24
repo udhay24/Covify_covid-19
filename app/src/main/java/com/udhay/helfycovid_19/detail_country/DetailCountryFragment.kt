@@ -4,28 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.RecyclerView
-import com.anychart.APIlib
-import com.anychart.AnyChart
-import com.anychart.chart.common.dataentry.DataEntry
-import com.anychart.chart.common.dataentry.ValueDataEntry
-import com.anychart.chart.common.listener.Event
-import com.anychart.chart.common.listener.ListenersInterface
-import com.anychart.enums.*
+import androidx.navigation.fragment.navArgs
 import com.udhay.helfycovid_19.R
-import com.udhay.helfycovid_19.data.model.CountryModel
 import com.udhay.helfycovid_19.util.Resource
 import kotlinx.android.synthetic.main.detail_country_fragment.*
-import kotlinx.android.synthetic.main.graph_holder.view.*
 import org.koin.android.ext.android.inject
+import kotlin.math.abs
 
 
 class DetailCountryFragment : Fragment() {
 
-    private val viewModel: DetailCountryViewModel by inject()
+    private val dataArgs: DetailCountryFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,17 +27,28 @@ class DetailCountryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.countryCount.observe(viewLifecycleOwner, Observer {
-            when(it) {
-                is Resource.SuccessResponse -> {
-//                    showCasesDistribution(it.body)
-//                    showCasesTimeline(it.body)
-                    graph_view_pager.adapter = GraphRecyclerAdapter(it.body)
+        graph_view_pager.adapter = GraphRecyclerAdapter(dataArgs.distributionData, dataArgs.frequencyModel)
+        val pageMargin = 10
+        val pageOffset = 30
 
+        graph_view_pager.setPageTransformer { page, position ->
+            val myOffset: Float = position * -(2 * pageOffset + pageMargin)
+            when {
+                position < -1 -> {
+                    page.translationX = -myOffset
                 }
-                is Resource.FailureResponse -> Unit//TODO() show error message
-                is Resource.LoadingResponse -> Unit //TODO() show loading message
+                position <= 1 -> {
+                    val scaleFactor =
+                        0.7f.coerceAtLeast(1 - abs(position - 0.14285715f))
+                    page.translationX = myOffset
+                    page.scaleY = scaleFactor
+                    page.alpha = scaleFactor
+                }
+                else -> {
+                    page.alpha = 0f
+                    page.translationX = myOffset
+                }
             }
-        })
+        }
     }
 }
