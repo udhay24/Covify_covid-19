@@ -1,18 +1,19 @@
 package com.udhay.helfycovid_19.home
 
-import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
+import android.view.View.OnTouchListener
 import android.view.ViewGroup
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-
+import androidx.navigation.fragment.findNavController
 import com.udhay.helfycovid_19.R
 import com.udhay.helfycovid_19.data.model.CountryModel
 import com.udhay.helfycovid_19.data.model.StateModel
@@ -20,6 +21,7 @@ import com.udhay.helfycovid_19.data.model.WorldModel
 import com.udhay.helfycovid_19.util.Resource
 import kotlinx.android.synthetic.main.home_fragment.*
 import org.koin.android.ext.android.inject
+
 
 class HomeFragment : Fragment() {
 
@@ -70,7 +72,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun displayMap() {
-        val mapUrl = "https://who.maps.arcgis.com/apps/opsdashboard/index.html#/c88e37cfc43b4ed3baf977d77e4a0667"
+        val mapUrl = MapDetailFragment.MAP_URL
         affected_web_view.settings.javaScriptEnabled = true // enable javascript
         affected_web_view.webViewClient = object: WebViewClient() {
             override fun onReceivedError(
@@ -83,6 +85,11 @@ class HomeFragment : Fragment() {
             }
         }
         affected_web_view.loadUrl(mapUrl)
+        affected_web_view.setOnTouchListener { _, event -> event.action == MotionEvent.ACTION_MOVE }
+
+        map_detail_text_view.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_mapDetailFragment)
+        }
     }
 
 }
