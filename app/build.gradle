@@ -99,4 +99,9 @@ dependencies {
 
     //twitter
     implementation 'org.twitter4j:twitter4j-core:4.0.3'
+
+    // image
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
 }
