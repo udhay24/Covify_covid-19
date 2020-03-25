@@ -28,8 +28,9 @@ class StatesRecyclerAdapter(
         fun populateDetails(state: StateModel.StateModelItem) {
             view.let {
                 it.state_title_text_view.text = state.state
-                it.cases_text_view.text = state.confirmed_cases.toString()
-                it.death_text_view.text = state.deaths.toString()
+                it.cases_text_view.text = state.confirmed_case.toString()
+                it.death_text_view.text = state.death.toString()
+                it.recovered_text_view.text = state.recovered.toString()
             }
             view.detail_button.setOnClickListener {
                 stateClickListener.stateClicked(state)

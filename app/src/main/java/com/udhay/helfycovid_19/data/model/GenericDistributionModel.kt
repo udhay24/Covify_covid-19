@@ -6,7 +6,6 @@ import java.io.Serializable
 data class GenericDistributionModel(
     val confirmedCases: Int,
     val hospitalizedCases: Int,
-    val icuCases: Int,
     val recoveredCases: Int,
     val deaths: Int
 ) : Serializable

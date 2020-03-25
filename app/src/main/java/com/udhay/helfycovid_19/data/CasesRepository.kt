@@ -13,17 +13,11 @@ class CasesRepository(
     private val service: CasesService
 ) {
     suspend fun fetchCountryData(): Response<CountryModel> {
-        return Response.success(
-            200,
-            Gson().fromJson(testCountryJson, CountryModel::class.java)
-        )
+        return service.fetchCountryData()
     }
 
     suspend fun fetchStateData(): Response<StateModel> {
-        return Response.success(
-            200,
-            Gson().fromJson(testStateJson, StateModel::class.java)
-        )
+        return service.fetchStatesData()
     }
 
     suspend fun fetchWorldData(): Response<WorldModel> {

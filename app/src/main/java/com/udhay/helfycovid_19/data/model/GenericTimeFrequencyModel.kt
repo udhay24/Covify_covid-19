@@ -7,6 +7,8 @@ data class GenericTimeFrequencyModel(
 ): Serializable {
     data class TimeCases(
         val date: String,
-        val confirmedCases: Int
+        val confirmedCases: Int,
+        val recovered: Int,
+        val deaths: Int
     )
 }

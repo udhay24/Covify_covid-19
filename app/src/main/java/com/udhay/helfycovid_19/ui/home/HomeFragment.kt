@@ -17,8 +17,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.GridLayoutManager
 import com.udhay.helfycovid_19.R
 import com.udhay.helfycovid_19.data.model.CountryModel
 import com.udhay.helfycovid_19.data.model.GenericDistributionModel
@@ -28,7 +26,6 @@ import com.udhay.helfycovid_19.util.Resource
 import kotlinx.android.synthetic.main.home_fragment.*
 import kotlinx.android.synthetic.main.more_covid_tasks.*
 import org.koin.android.ext.android.inject
-import twitter4j.Status
 
 
 class HomeFragment : Fragment(), StatesRecyclerAdapter.StateClickListener {
@@ -50,17 +47,16 @@ class HomeFragment : Fragment(), StatesRecyclerAdapter.StateClickListener {
                     updateCountryInfo(countryData.body)
                     distribution_view_more_text.setOnClickListener {
                         val distributionData = GenericDistributionModel(
-                            confirmedCases = countryData.body.confirmed_cases,
-                            hospitalizedCases = countryData.body.hospitalised_cases,
-                            icuCases = countryData.body.icu_cases,
-                            recoveredCases = countryData.body.recovered_cases,
-                            deaths = countryData.body.deaths
+                            confirmedCases = countryData.body.confirmed_case,
+                            hospitalizedCases = countryData.body.hospitalised_case,
+                            recoveredCases = countryData.body.recovered,
+                            deaths = countryData.body.death
                         )
 
                         val frequencyModel = GenericTimeFrequencyModel(
-                            countryData.body.datewise_data.filterNotNull().map {
+                            countryData.body.datewise_data.map {
                                 GenericTimeFrequencyModel.TimeCases(
-                                    it.date, it.confirmed_cases
+                                    it.date, it.hospitalised_case, it.recovered, it.death
                                 )
                             }
                         )
@@ -99,16 +95,16 @@ class HomeFragment : Fragment(), StatesRecyclerAdapter.StateClickListener {
     }
 
 
-    private fun updateCountryInfo(countryModel: CountryModel) {
-        cases_text_view.text = countryModel.confirmed_cases.toString()
-        recovered_text_view.text = countryModel.recovered_cases.toString()
-        deaths_text_view.text = countryModel.deaths.toString()
+    private fun updateCountryInfo(countryModel: CountryModel.CountryCountModelItem) {
+        cases_text_view.text = countryModel.confirmed_case.toString()
+        recovered_text_view.text = countryModel.recovered.toString()
+        deaths_text_view.text = countryModel.death.toString()
     }
 
     private fun updateStateInfo(stateModel: StateModel) {
         val worstStates = stateModel
-            .sortedBy { it.confirmed_cases }
-            .subList(0, 5)
+            .sortedByDescending { it.confirmed_case }
+
         states_recycler_view.adapter = StatesRecyclerAdapter(worstStates, this)
     }
 
@@ -135,17 +131,16 @@ class HomeFragment : Fragment(), StatesRecyclerAdapter.StateClickListener {
 
     override fun stateClicked(state: StateModel.StateModelItem) {
         val distributionModel = GenericDistributionModel(
-            confirmedCases = state.confirmed_cases,
-            hospitalizedCases = state.hospitalised_cases,
-            icuCases = state.icu_cases,
-            recoveredCases = state.recovered_cases,
-            deaths = state.deaths
+            confirmedCases = state.confirmed_case,
+            hospitalizedCases = state.hospitalised_case,
+            recoveredCases = state.recovered,
+            deaths = state.death
         )
 
         val timeFrequencyModel = GenericTimeFrequencyModel(
             state.datewise_data.filterNotNull().map {
                 GenericTimeFrequencyModel.TimeCases(
-                    it.date, it.confirmed_cases
+                    it.date, it.confirmed_case, it.recovered, it.death
                 )
             }
         )

@@ -13,20 +13,9 @@ import twitter4j.TwitterFactory
 
 import twitter4j.conf.ConfigurationBuilder
 
-
-
-
 private val covidApiClient: (context: Context) -> OkHttpClient = { context ->
     OkHttpClient()
         .newBuilder()
-        .addInterceptor {
-            var request = it.request()
-            request =
-                request.newBuilder()
-                    .addHeader("x-api-key", "0059be4be9579db9a91a9cbf07b7788d4a5bc881")
-                    .build()
-            it.proceed(request)
-        }
         .addNetworkInterceptor(HttpLoggingInterceptor().apply {
             level = if (BuildConfig.DEBUG) {
                 HttpLoggingInterceptor.Level.HEADERS
@@ -40,7 +29,7 @@ private val covidApiClient: (context: Context) -> OkHttpClient = { context ->
 private val retrofit: (context: Context) -> Retrofit = {
     Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
-        .baseUrl("https://api.moviebuff.com/api/v2/")
+        .baseUrl("https://helfy-covid.herokuapp.com/")
         .client(covidApiClient(it))
         .build()
 }
@@ -64,6 +53,3 @@ private val twitter: () -> Twitter = {
     val tf = TwitterFactory(cb.build())
     tf.instance
 }
-
-val accessecret = "E6680IkSxv0xYCgZ8AnVjkFD0oNylMDjpp3rEAFSa0As9"
-val accesstoken = "1068147708546826240-Yms0PDeEqv0gfCdR7Bv2YSdrWKiFCa"

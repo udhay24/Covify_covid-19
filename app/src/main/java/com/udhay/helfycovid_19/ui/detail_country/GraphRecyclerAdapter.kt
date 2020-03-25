@@ -63,8 +63,7 @@ class GraphRecyclerAdapter(
             val data: MutableList<DataEntry> = ArrayList()
             data.add(ValueDataEntry("Confirmed", distributionModel.confirmedCases))
             data.add(ValueDataEntry("hospitalized", distributionModel.hospitalizedCases))
-            data.add(ValueDataEntry("ICU", distributionModel.icuCases))
-            data.add(ValueDataEntry("Recovered", distributionModel.icuCases))
+            data.add(ValueDataEntry("Recovered", distributionModel.recoveredCases))
             data.add(ValueDataEntry("Deaths", distributionModel.deaths))
 
             pie.data(data)
