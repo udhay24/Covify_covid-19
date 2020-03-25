@@ -97,5 +97,6 @@ dependencies {
     //chrome
     implementation 'androidx.browser:browser:1.2.0'
 
-
+    //twitter
+    implementation 'org.twitter4j:twitter4j-core:4.0.3'
 }

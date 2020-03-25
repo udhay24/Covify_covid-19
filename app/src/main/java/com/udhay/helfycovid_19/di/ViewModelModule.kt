@@ -7,7 +7,8 @@ import org.koin.dsl.module
 val viewModelModule = module {
     viewModel {
         HomeViewModel(
-            repository = get()
+            casesRepository = get(),
+            twitterRepository = get()
         )
     }
 }

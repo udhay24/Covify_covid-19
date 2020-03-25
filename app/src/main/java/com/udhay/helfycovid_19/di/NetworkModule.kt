@@ -8,6 +8,13 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import twitter4j.Twitter
+import twitter4j.TwitterFactory
+
+import twitter4j.conf.ConfigurationBuilder
+
+
+
 
 private val covidApiClient: (context: Context) -> OkHttpClient = { context ->
     OkHttpClient()
@@ -38,8 +45,25 @@ private val retrofit: (context: Context) -> Retrofit = {
         .build()
 }
 
-val retrofitModule = module {
+val networkModule = module {
     single {
         retrofit(androidContext())
     }
+    single<Twitter> {
+        twitter()
+    }
 }
+
+private val twitter: () -> Twitter = {
+    val cb = ConfigurationBuilder()
+    cb.setDebugEnabled(true)
+        .setOAuthConsumerKey("vYg4Yz8FXcarulLbBZyOzd9fj")
+        .setOAuthConsumerSecret("a7byq5DZHbn1RHqa7MfmfAULWaLkuKV8IvEtAiIDFgm89UNJGH")
+        .setOAuthAccessToken("1068147708546826240-Yms0PDeEqv0gfCdR7Bv2YSdrWKiFCa")
+        .setOAuthAccessTokenSecret("E6680IkSxv0xYCgZ8AnVjkFD0oNylMDjpp3rEAFSa0As9")
+    val tf = TwitterFactory(cb.build())
+    tf.instance
+}
+
+val accessecret = "E6680IkSxv0xYCgZ8AnVjkFD0oNylMDjpp3rEAFSa0As9"
+val accesstoken = "1068147708546826240-Yms0PDeEqv0gfCdR7Bv2YSdrWKiFCa"

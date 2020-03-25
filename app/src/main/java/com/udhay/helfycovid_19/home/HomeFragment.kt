@@ -24,6 +24,7 @@ import com.udhay.helfycovid_19.data.model.*
 import com.udhay.helfycovid_19.util.Resource
 import kotlinx.android.synthetic.main.home_fragment.*
 import org.koin.android.ext.android.inject
+import twitter4j.Status
 
 
 class HomeFragment : Fragment(), StatesRecyclerAdapter.StateClickListener {
@@ -88,7 +89,17 @@ class HomeFragment : Fragment(), StatesRecyclerAdapter.StateClickListener {
             builder.setExitAnimations(this@HomeFragment.requireContext(), android.R.anim.fade_in, android.R.anim.fade_out)
             builder.build().launchUrl(this@HomeFragment.requireContext(), Uri.parse(webUrl))
         }
+        viewModel.latestTweets.observe(viewLifecycleOwner, Observer {
+            when(it) {
+                is Resource.SuccessResponse ->  populateTwitterFeeds(it.body)
+//                is Resource.FailureResponse -> Unit//TODO() show error message
+                is Resource.LoadingResponse -> Unit //TODO() show loading message
+            }
+        })
+    }
 
+    private fun populateTwitterFeeds(feeds: List<Status>) {
+        twitter_recycler_view.adapter = TwitterRecyclerAdapter(feeds)
     }
     private fun updateCountryInfo(countryModel: CountryModel) {
         cases_text_view.text = countryModel.confirmed_cases.toString()
