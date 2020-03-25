@@ -1,4 +1,4 @@
-package com.udhay.helfycovid_19.home
+package com.udhay.helfycovid_19.ui.home
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -15,8 +15,7 @@ import twitter4j.Status
 import java.lang.Exception
 
 class HomeViewModel(
-    private val casesRepository: CasesRepository,
-    private val twitterRepository: TwitterRepository
+    private val casesRepository: CasesRepository
 ) : ViewModel() {
 
     val countryCount: LiveData<Resource<CountryModel, Exception>> = liveData {
@@ -49,19 +48,6 @@ class HomeViewModel(
             emit(Resource.SuccessResponse(result.body()!!))
         } else {
             emit(Resource.FailureResponse(Exception(result.errorBody().toString())))
-        }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.N)
-    val latestTweets: LiveData<Resource<List<Status>, Exception>> = liveData {
-        emit(Resource.LoadingResponse)
-        val tweets = twitterRepository.getTweetsFromMixedHandles()
-        if (tweets.isSuccessful) {
-            emit(Resource.SuccessResponse(tweets.body()!!))
-        } else {
-            emit(Resource.FailureResponse(
-                Exception(tweets.errorBody()?.toString())
-            ))
         }
     }
 }

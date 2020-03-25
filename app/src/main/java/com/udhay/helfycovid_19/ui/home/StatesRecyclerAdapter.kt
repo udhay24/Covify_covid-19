@@ -1,13 +1,11 @@
-package com.udhay.helfycovid_19.home
+package com.udhay.helfycovid_19.ui.home
 
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.udhay.helfycovid_19.R
 import com.udhay.helfycovid_19.data.model.StateModel
-import kotlinx.android.synthetic.main.home_fragment.view.*
 import kotlinx.android.synthetic.main.state_recycler_view_item.view.*
 import kotlinx.android.synthetic.main.state_recycler_view_item.view.cases_text_view
 

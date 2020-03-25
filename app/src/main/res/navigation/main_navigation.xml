@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.udhay.helfycovid_19.home.HomeFragment"
+        android:name="com.udhay.helfycovid_19.ui.home.HomeFragment"
         android:label="HomeFragment" >
         <action
             android:id="@+id/action_homeFragment_to_mapDetailFragment"
@@ -15,15 +15,18 @@
         <action
             android:id="@+id/action_homeFragment_to_detailCountryFragment"
             app:destination="@id/detailCountryFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_twitterFragment"
+            app:destination="@id/twitterFragment" />
     </fragment>
     <fragment
         android:id="@+id/mapDetailFragment"
-        android:name="com.udhay.helfycovid_19.home.MapDetailFragment"
+        android:name="com.udhay.helfycovid_19.ui.home.MapDetailFragment"
         android:label="fragment_map_detail"
         tools:layout="@layout/fragment_map_detail" />
     <fragment
         android:id="@+id/detailCountryFragment"
-        android:name="com.udhay.helfycovid_19.detail_country.GraphFragment"
+        android:name="com.udhay.helfycovid_19.ui.detail_country.GraphFragment"
         android:label="detail_country_fragment"
         tools:layout="@layout/graph_fragment" >
         <argument
@@ -33,4 +36,9 @@
             android:name="frequencyModel"
             app:argType="com.udhay.helfycovid_19.data.model.GenericTimeFrequencyModel" />
     </fragment>
+    <fragment
+        android:id="@+id/twitterFragment"
+        android:name="com.udhay.helfycovid_19.ui.twitter.TwitterFragment"
+        android:label="twitter_fragment"
+        tools:layout="@layout/twitter_fragment" />
 </navigation>

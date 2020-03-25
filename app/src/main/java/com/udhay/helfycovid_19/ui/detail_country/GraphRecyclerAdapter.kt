@@ -1,4 +1,4 @@
-package com.udhay.helfycovid_19.detail_country
+package com.udhay.helfycovid_19.ui.detail_country
 
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +16,6 @@ import com.anychart.core.cartesian.series.Line
 import com.anychart.data.Mapping
 import com.anychart.graphics.vector.Stroke
 import com.udhay.helfycovid_19.R
-import com.udhay.helfycovid_19.data.model.CountryModel
 import kotlinx.android.synthetic.main.graph_holder.view.*
 import com.anychart.data.Set;
 import com.anychart.enums.*

@@ -1,4 +1,4 @@
-package com.udhay.helfycovid_19.home
+package com.udhay.helfycovid_19.ui.home
 
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -19,7 +19,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.udhay.helfycovid_19.R
 import com.udhay.helfycovid_19.data.model.CountryModel
 import com.udhay.helfycovid_19.data.model.GenericDistributionModel
@@ -27,6 +26,7 @@ import com.udhay.helfycovid_19.data.model.GenericTimeFrequencyModel
 import com.udhay.helfycovid_19.data.model.StateModel
 import com.udhay.helfycovid_19.util.Resource
 import kotlinx.android.synthetic.main.home_fragment.*
+import kotlinx.android.synthetic.main.more_covid_tasks.*
 import org.koin.android.ext.android.inject
 import twitter4j.Status
 
@@ -83,7 +83,7 @@ class HomeFragment : Fragment(), StatesRecyclerAdapter.StateClickListener {
             }
         })
         displayMap()
-        checkup_fab.setOnClickListener {
+        self_assesment_card.setOnClickListener {
             val webUrl = "https://covid.apollo247.com/"
             val builder = CustomTabsIntent.Builder()
             builder.setToolbarColor(ContextCompat.getColor(this@HomeFragment.requireContext(), R.color.colorPrimary))
@@ -93,23 +93,12 @@ class HomeFragment : Fragment(), StatesRecyclerAdapter.StateClickListener {
             builder.setExitAnimations(this@HomeFragment.requireContext(), android.R.anim.fade_in, android.R.anim.fade_out)
             builder.build().launchUrl(this@HomeFragment.requireContext(), Uri.parse(webUrl))
         }
-        viewModel.latestTweets.observe(viewLifecycleOwner, Observer {
-            when(it) {
-                is Resource.SuccessResponse ->  populateTwitterFeeds(it.body)
-//                is Resource.FailureResponse -> Unit//TODO() show error message
-                is Resource.LoadingResponse -> Unit //TODO() show loading message
-            }
-        })
+        twitter_card.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_twitterFragment)
+        }
     }
 
-    private fun populateTwitterFeeds(feeds: List<Status>) {
-        val dividerItemDecoration = DividerItemDecoration(
-            twitter_recycler_view.context,
-            GridLayoutManager.HORIZONTAL
-        )
-        twitter_recycler_view.addItemDecoration(dividerItemDecoration)
-        twitter_recycler_view.adapter = TwitterRecyclerAdapter(feeds)
-    }
+
     private fun updateCountryInfo(countryModel: CountryModel) {
         cases_text_view.text = countryModel.confirmed_cases.toString()
         recovered_text_view.text = countryModel.recovered_cases.toString()

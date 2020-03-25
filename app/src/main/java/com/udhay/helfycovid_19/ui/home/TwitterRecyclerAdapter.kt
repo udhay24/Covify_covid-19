@@ -1,4 +1,4 @@
-package com.udhay.helfycovid_19.home
+package com.udhay.helfycovid_19.ui.home
 
 import android.util.Log
 import android.view.LayoutInflater

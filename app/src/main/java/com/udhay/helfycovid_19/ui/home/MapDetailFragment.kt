@@ -1,9 +1,7 @@
-package com.udhay.helfycovid_19.home
+package com.udhay.helfycovid_19.ui.home
 
-import android.R.attr
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebResourceError
@@ -12,9 +10,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.udhay.helfycovid_19.R
 import kotlinx.android.synthetic.main.fragment_map_detail.*
 
