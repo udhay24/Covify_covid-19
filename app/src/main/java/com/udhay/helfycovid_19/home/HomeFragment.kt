@@ -1,6 +1,5 @@
 package com.udhay.helfycovid_19.home
 
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
@@ -15,12 +14,17 @@ import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.udhay.helfycovid_19.R
-import com.udhay.helfycovid_19.data.model.*
+import com.udhay.helfycovid_19.data.model.CountryModel
+import com.udhay.helfycovid_19.data.model.GenericDistributionModel
+import com.udhay.helfycovid_19.data.model.GenericTimeFrequencyModel
+import com.udhay.helfycovid_19.data.model.StateModel
 import com.udhay.helfycovid_19.util.Resource
 import kotlinx.android.synthetic.main.home_fragment.*
 import org.koin.android.ext.android.inject
@@ -99,6 +103,11 @@ class HomeFragment : Fragment(), StatesRecyclerAdapter.StateClickListener {
     }
 
     private fun populateTwitterFeeds(feeds: List<Status>) {
+        val dividerItemDecoration = DividerItemDecoration(
+            twitter_recycler_view.context,
+            GridLayoutManager.HORIZONTAL
+        )
+        twitter_recycler_view.addItemDecoration(dividerItemDecoration)
         twitter_recycler_view.adapter = TwitterRecyclerAdapter(feeds)
     }
     private fun updateCountryInfo(countryModel: CountryModel) {
