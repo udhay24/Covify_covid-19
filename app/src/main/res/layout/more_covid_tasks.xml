@@ -6,6 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
+        android:stateListAnimator="@animator/click_animation"
         android:id="@+id/guideline_card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -13,6 +14,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="4dp"
         android:minHeight="170dp"
+        app:cardCornerRadius="8dp"
         android:maxHeight="200dp"
         app:layout_constraintDimensionRatio="w,1:1"
         app:layout_constraintEnd_toStartOf="@+id/world_map_card"
@@ -24,14 +26,18 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <ImageView
+                android:padding="20dp"
+                app:srcCompat="@drawable/icon_correct"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="16dp"/>
             <TextView
+                android:textStyle="bold"
+                android:textColor="@color/textGrey"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="WHO GuideLines"
+                android:text="WHO Guide lines"
                 android:layout_gravity="center_horizontal"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -44,6 +50,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:minHeight="170dp"
+        android:stateListAnimator="@animator/click_animation"
+        app:cardCornerRadius="8dp"
         app:layout_constraintDimensionRatio="w,1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -54,11 +62,15 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <ImageView
+                android:padding="10dp"
+                app:srcCompat="@drawable/icon_world"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="16dp"/>
             <TextView
+                android:textColor="@color/textGrey"
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="World Map"
@@ -69,11 +81,13 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/twitter_card"
         android:layout_width="0dp"
+        app:cardCornerRadius="8dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="4dp"
         android:minHeight="170dp"
+        android:stateListAnimator="@animator/click_animation"
         app:layout_constraintDimensionRatio="w,1:1"
         app:layout_constraintEnd_toStartOf="@+id/self_assesment_card"
         app:layout_constraintHorizontal_bias="0.5"
@@ -84,11 +98,16 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <ImageView
+                app:srcCompat="@drawable/icon_hashtag"
+                android:tint="@color/purple"
+                android:padding="20dp"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="16dp"/>
             <TextView
+                android:textStyle="bold"
+                android:textColor="@color/textGrey"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Latest Tweets"
@@ -97,8 +116,10 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:stateListAnimator="@animator/click_animation"
         android:id="@+id/self_assesment_card"
         android:layout_width="0dp"
+        app:cardCornerRadius="8dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="16dp"
@@ -114,11 +135,17 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:padding="10dp"
+                android:tint="@color/purple"
+                app:srcCompat="@drawable/icon_test"
+                android:layout_width="75dp"
+                android:layout_height="85dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="16dp"/>
             <TextView
+                android:textColor="@color/textGrey"
+                android:textStyle="bold"
+                android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Covid-19 Self-Assessment"

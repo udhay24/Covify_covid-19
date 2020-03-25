@@ -2,12 +2,17 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginStart="10dp"
+    android:background="@color/white"
+    android:layout_marginEnd="10dp"
+    android:layout_marginTop="10dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="4dp">
+    app:cardCornerRadius="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:paddingBottom="20dp"
         android:layout_height="wrap_content">
 
         <ImageView
@@ -21,6 +26,9 @@
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
+            android:textSize="18sp"
+            android:textColor="@color/textGrey"
+            android:textStyle="bold"
             android:id="@+id/profile_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -33,6 +41,8 @@
             tools:text="Modi" />
 
         <TextView
+            android:textSize="15sp"
+            android:textColor="@color/textGrey"
             android:id="@+id/tweet_body_text_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -43,21 +53,24 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profile_icon"
-            tools:text=" Convinced @iamlaurenmusic was lying when she said she learned ‘The Joker’ last night because she owned that one 👏🏼🌟…" />
+            tools:text="Convinced @iamlaurenmusic was lying when she said she learned ‘The Joker’ last night because she owned that one 👏🏼🌟…" />
 
         <TextView
+            android:textColor="@color/textGrey"
+            android:textSize="12sp"
             android:id="@+id/tweet_time_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="188dp"
+            app:layout_constraintStart_toStartOf="@+id/profile_id"
+            app:layout_constraintTop_toBottomOf="@+id/profile_id"
             tools:text="2: 30 P.m" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/open_tweet_button"
             android:layout_width="wrap_content"
+            android:visibility="gone"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
