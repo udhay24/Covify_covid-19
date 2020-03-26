@@ -86,7 +86,7 @@ class GraphRecyclerAdapter(
             view.pie_chart.transparentCircleRadius = 61f
 
             view.pie_chart.setDrawCenterText(true)
-
+            view.pie_chart.rotationAngle = 180f
             view.pie_chart.isRotationEnabled = false
             view.pie_chart.isHighlightPerTapEnabled = true
 

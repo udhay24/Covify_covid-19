@@ -1,6 +1,7 @@
 package com.udhay.helfycovid_19.ui.home
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.udhay.helfycovid_19.data.CasesRepository
@@ -8,42 +9,53 @@ import com.udhay.helfycovid_19.data.model.CountryModel
 import com.udhay.helfycovid_19.data.model.StateModel
 import com.udhay.helfycovid_19.data.model.WorldModel
 import com.udhay.helfycovid_19.util.Resource
-import java.lang.Exception
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 class HomeViewModel(
     private val casesRepository: CasesRepository
-) : ViewModel() {
+) : ViewModel(), CoroutineScope {
 
-    val countryCount: LiveData<Resource<CountryModel.CountryCountModelItem, Exception>> = liveData {
-        emit(Resource.LoadingResponse)
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Default
 
-        val result = casesRepository.fetchCountryData()
-        if (result.isSuccessful) {
-            emit(Resource.SuccessResponse(result.body()!![0]))
-        } else {
-            emit(Resource.FailureResponse(Exception(result.errorBody().toString())))
+    val countryCount: MutableLiveData<Resource<CountryModel.CountryCountModelItem, Exception>> =
+        MutableLiveData()
+
+    val stateCount: MutableLiveData<Resource<StateModel, Exception>> = MutableLiveData()
+
+    fun retryData() {
+        launch {
+            postCountryData()
+            postStateData()
         }
     }
 
-    val stateCount: LiveData<Resource<StateModel, Exception>> = liveData {
-        emit(Resource.LoadingResponse)
-
+    private suspend fun postCountryData() {
+        stateCount.postValue(Resource.LoadingResponse)
         val result = casesRepository.fetchStateData()
         if (result.isSuccessful) {
-            emit(Resource.SuccessResponse(result.body()!!))
+            stateCount.postValue(Resource.SuccessResponse(result.body()!!))
         } else {
-            emit(Resource.FailureResponse(Exception(result.errorBody().toString())))
+            stateCount.postValue(Resource.FailureResponse(Exception(result.errorBody().toString())))
         }
     }
 
-    val worldCount: LiveData<Resource<WorldModel, Exception>> = liveData {
-        emit(Resource.LoadingResponse)
-
-        val result = casesRepository.fetchWorldData()
+    private suspend fun postStateData() {
+        countryCount.postValue(Resource.LoadingResponse)
+        val result = casesRepository.fetchCountryData()
         if (result.isSuccessful) {
-            emit(Resource.SuccessResponse(result.body()!!))
+            countryCount.postValue(Resource.SuccessResponse(result.body()!![0]))
         } else {
-            emit(Resource.FailureResponse(Exception(result.errorBody().toString())))
+            countryCount.postValue(
+                Resource.FailureResponse(
+                    Exception(
+                        result.errorBody().toString()
+                    )
+                )
+            )
         }
     }
 }

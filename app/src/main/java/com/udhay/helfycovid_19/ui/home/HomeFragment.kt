@@ -45,6 +45,10 @@ class HomeFragment : Fragment(), StatesRecyclerAdapter.StateClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        swipe_refresh_layout.setOnRefreshListener {
+            viewModel.retryData()
+        }
         viewModel.countryCount.observe(viewLifecycleOwner, Observer {countryData ->
             when(countryData) {
                 is Resource.SuccessResponse ->  {
@@ -69,16 +73,17 @@ class HomeFragment : Fragment(), StatesRecyclerAdapter.StateClickListener {
                         )
                             findNavController().navigate(navOptions)
                     }
+                    swipe_refresh_layout.isRefreshing = false
                 }
-                is Resource.FailureResponse -> Unit//TODO() show error message
+                is Resource.FailureResponse -> { swipe_refresh_layout.isRefreshing = false }
                 is Resource.LoadingResponse -> Unit //TODO() show loading message
             }
         })
 
         viewModel.stateCount.observe(viewLifecycleOwner, Observer {
             when(it) {
-                is Resource.SuccessResponse ->  updateStateInfo(it.body)
-                is Resource.FailureResponse -> Unit//TODO() show error message
+                is Resource.SuccessResponse ->  { updateStateInfo(it.body); swipe_refresh_layout.isRefreshing = false}
+                is Resource.FailureResponse -> { swipe_refresh_layout.isRefreshing = false }
                 is Resource.LoadingResponse -> Unit //TODO() show loading message
             }
         })
