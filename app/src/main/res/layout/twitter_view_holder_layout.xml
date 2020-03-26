@@ -12,13 +12,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:paddingBottom="20dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp">
 
         <ImageView
             android:id="@+id/profile_icon"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,60 +26,113 @@
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
-            android:textSize="18sp"
-            android:textColor="@color/textGrey"
-            android:textStyle="bold"
-            android:id="@+id/profile_id"
+            android:id="@+id/profile_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginBottom="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
             android:text="-"
-            app:layout_constraintBottom_toBottomOf="@+id/profile_icon"
+            android:textColor="@color/textGrey"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/likes_count"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/profile_icon"
             app:layout_constraintTop_toTopOf="@+id/profile_icon"
             tools:text="Modi" />
 
         <TextView
-            android:textSize="15sp"
-            android:textColor="@color/textGrey"
             android:id="@+id/tweet_body_text_view"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
             android:text="_"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="@color/textGrey"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/retweets_count"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_icon"
+            app:layout_constraintTop_toBottomOf="@+id/tweet_time_text_view"
             tools:text="Convinced @iamlaurenmusic was lying when she said she learned ‘The Joker’ last night because she owned that one 👏🏼🌟…" />
 
         <TextView
-            android:textColor="@color/textGrey"
-            android:textSize="12sp"
             android:id="@+id/tweet_time_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="188dp"
-            app:layout_constraintStart_toStartOf="@+id/profile_id"
-            app:layout_constraintTop_toBottomOf="@+id/profile_id"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/textGrey"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/profile_name"
+            app:layout_constraintTop_toBottomOf="@+id/profile_name"
             tools:text="2: 30 P.m" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/open_tweet_button"
             android:layout_width="wrap_content"
-            android:visibility="gone"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="16dp"
             android:foregroundGravity="center"
             android:src="@drawable/ic_iconmonstr_arrow_right_thin"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tweet_body_text_view" />
+
+        <TextView
+            android:id="@+id/likes_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toTopOf="@+id/retweets_count"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="123"
+            android:drawableEnd="@drawable/heart_24"
+            android:drawablePadding="8dp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/retweets_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:drawableEnd="@drawable/twitter_retweet"
+            app:layout_constraintBottom_toTopOf="@+id/twitter_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/likes_count"
+            tools:text="1233"
+            android:gravity="center"/>
+
+        <ImageView
+            android:id="@+id/twitter_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="48dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/retweets_count"
+            android:src="@drawable/ic_twitter" />
+
+        <ImageView
+            android:id="@+id/verified_flag"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tweet_time_text_view"
+            app:layout_constraintStart_toEndOf="@+id/tweet_time_text_view"
+            app:layout_constraintTop_toTopOf="@+id/tweet_time_text_view"
+            tools:src="@drawable/ic_twitter_verified_badge" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

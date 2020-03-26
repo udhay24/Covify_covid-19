@@ -8,8 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.udhay.helfycovid_19.R
 import kotlinx.android.synthetic.main.graph_fragment.*
-import kotlin.math.abs
-
 
 class GraphFragment : Fragment() {
 
@@ -25,27 +23,33 @@ class GraphFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         graph_view_pager.adapter = GraphRecyclerAdapter(dataArgs.distributionData, dataArgs.frequencyModel)
-//        val pageMargin = 10
-//        val pageOffset = 30
-//
-//        graph_view_pager.setPageTransformer { page, position ->
-//            val myOffset: Float = position * -(2 * pageOffset + pageMargin)
-//            when {
-//                position < -1 -> {
-//                    page.translationX = -myOffset
-//                }
-//                position <= 1 -> {
-//                    val scaleFactor =
-//                        0.7f.coerceAtLeast(1 - abs(position - 0.14285715f))
-//                    page.translationX = myOffset
-//                    page.scaleY = scaleFactor
-//                    page.alpha = scaleFactor
-//                }
-//                else -> {
-//                    page.alpha = 0f
-//                    page.translationX = myOffset
-//                }
-//            }
-//        }
+        graph_view_pager.setPageTransformer { page, position ->
+            when {
+                position < -1 -> {    // [-Infinity,-1)
+                    // This page is way off-screen to the left.
+                    page.alpha = 0f
+
+                }
+                position <= 0 -> {    // [-1,0]
+                    page.alpha = 1f
+                    page.translationX = 0f
+                    page.scaleX = 1f
+                    page.scaleY = 1f
+
+                }
+                position <= 1 -> {    // (0,1]
+                    page.translationX = -position*page.width
+                    page.alpha = 1-Math.abs(position)
+                    page.scaleX = 1-Math.abs(position)
+                    page.scaleY = 1-Math.abs(position)
+
+                }
+                else -> {    // (1,+Infinity]
+                    // This page is way off-screen to the right.
+                    page.alpha = 0f
+
+                }
+            }
+        }
     }
 }

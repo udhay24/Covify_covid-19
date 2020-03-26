@@ -44,8 +44,8 @@ class GraphRecyclerAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val view: View = when(viewType) {
-            1 -> LayoutInflater.from(parent.context).inflate(R.layout.pie_chart_graph, parent, false)
-            0 -> LayoutInflater.from(parent.context).inflate(R.layout.line_chart_graph, parent, false)
+            0 -> LayoutInflater.from(parent.context).inflate(R.layout.pie_chart_graph, parent, false)
+            1 -> LayoutInflater.from(parent.context).inflate(R.layout.line_chart_graph, parent, false)
             else -> View(parent.context)
         }
         return Holder(view)
@@ -58,8 +58,8 @@ class GraphRecyclerAdapter(
     @ExperimentalStdlibApi
     override fun onBindViewHolder(holder: Holder, position: Int) {
         when(position) {
-            1 -> holder.showDistributionGraph(distributionModel)
-            0 -> holder.showFrequencyChart()
+            0 -> holder.showDistributionGraph(distributionModel)
+            1 -> holder.showFrequencyChart()
         }
     }
 
@@ -162,19 +162,19 @@ class GraphRecyclerAdapter(
 
             val chart: LineChart = view.line_chart
 
-            // background color
-            chart.setBackgroundColor(Color.WHITE)
-
             // disable description text
-            chart.description.isEnabled = false
+            chart.description.isEnabled = true
+            chart.description = Description().apply {
+                text = "Cases Trend"
+            }
 
             // enable touch gestures
             chart.setTouchEnabled(true)
 
-            // set listeners
+//            // set listeners
             chart.setDrawGridBackground(false)
-            chart.axisLeft.setDrawGridLines(false)
-            chart.xAxis.setDrawGridLines(false)
+//            chart.axisLeft.setDrawGridLines(false)
+//            chart.xAxis.setDrawGridLines(false)
 
             val mv = MyMarkerView(view.context, R.layout.custom_marker_view)
 
@@ -197,8 +197,6 @@ class GraphRecyclerAdapter(
             xAxis.valueFormatter = object : IndexAxisValueFormatter() {
                 override fun getFormattedValue(value: Float): String {
                     val date = Date(value.toLong())
-                    //Specify the format you'd like
-                    //Specify the format you'd like
                     val sdf = SimpleDateFormat("MM/dd", Locale.ENGLISH)
                     return sdf.format(date)
                 }
@@ -254,9 +252,11 @@ class GraphRecyclerAdapter(
                 set1.notifyDataSetChanged()
                 chart.data.notifyDataChanged()
                 chart.notifyDataSetChanged()
+                set1.setMode(LineDataSet.Mode.CUBIC_BEZIER)
             } else {
                 // create a dataset and give it a type
                 set1 = LineDataSet(values, "Confirmed Cases")
+                set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
                 set1.setDrawIcons(false)
 
                 // draw dashed line
@@ -293,7 +293,7 @@ class GraphRecyclerAdapter(
                 val drawable =
                     ContextCompat.getDrawable(
                         view.context,
-                        R.drawable.fade_red
+                        R.drawable.state_card_gradient
                     )
                 set1.fillDrawable = drawable
 
