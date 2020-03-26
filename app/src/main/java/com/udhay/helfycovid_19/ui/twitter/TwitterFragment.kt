@@ -28,6 +28,9 @@ class TwitterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        animation.playAnimation()
+        animation.visibility = View.VISIBLE
+        twitter_recycler_view.visibility = View.GONE
         viewModel.latestTweets.observe(viewLifecycleOwner, Observer {
             when(it) {
                 is Resource.SuccessResponse ->  populateTwitterFeeds(it.body)
@@ -38,6 +41,9 @@ class TwitterFragment : Fragment() {
     }
 
     private fun populateTwitterFeeds(feeds: List<Status>) {
+        animation.pauseAnimation()
+        animation.visibility = View.GONE
+        twitter_recycler_view.visibility = View.VISIBLE
         twitter_recycler_view.adapter =
             TwitterRecyclerAdapter(feeds)
     }
