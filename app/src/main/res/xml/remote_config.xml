@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<defaultsMap>
+    <entry>
+        <key>o_auth_access_token_secret</key>
+        <value>E6680IkSxv0xYCgZ8AnVjkFD0oNylMDjpp3rEAFSa0As9</value>
+    </entry>
+    <entry>
+        <key>o_auth_access_token</key>
+        <value>1068147708546826240-Yms0PDeEqv0gfCdR7Bv2YSdrWKiFCa</value>
+    </entry>
+    <entry>
+        <key>o_auth_consumer_secret</key>
+        <value>a7byq5DZHbn1RHqa7MfmfAULWaLkuKV8IvEtAiIDFgm89UNJGH</value>
+    </entry>
+    <entry>
+    <key>o_auth_consumer_key</key>
+    <value>vYg4Yz8FXcarulLbBZyOzd9fj</value>
+    </entry>
+    <entry>
+        <key>world_map</key>
+        <value>https://who.maps.arcgis.com/apps/opsdashboard/index.html#/c88e37cfc43b4ed3baf977d77e4a0667</value>
+    </entry>
+    <entry>
+        <key>self_check_url</key>
+        <value>https://covid.apollo247.com/</value>
+    </entry>
+</defaultsMap>

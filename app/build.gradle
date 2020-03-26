@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: "androidx.navigation.safeargs.kotlin"
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 29
@@ -103,5 +105,14 @@ dependencies {
 
     // image
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    //analytics
+    implementation 'com.google.firebase:firebase-analytics:17.2.3'
+
+    // Add the Firebase Crashlytics dependency.
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+
+    //remote config
+    implementation 'com.google.firebase:firebase-config:19.1.3'
 
 }

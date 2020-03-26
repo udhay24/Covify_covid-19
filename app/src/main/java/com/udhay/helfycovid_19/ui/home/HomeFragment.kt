@@ -17,11 +17,13 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.udhay.helfycovid_19.R
 import com.udhay.helfycovid_19.data.model.CountryModel
 import com.udhay.helfycovid_19.data.model.GenericDistributionModel
 import com.udhay.helfycovid_19.data.model.GenericTimeFrequencyModel
 import com.udhay.helfycovid_19.data.model.StateModel
+import com.udhay.helfycovid_19.util.Constants
 import com.udhay.helfycovid_19.util.Resource
 import kotlinx.android.synthetic.main.home_fragment.*
 import kotlinx.android.synthetic.main.more_covid_tasks.*
@@ -31,11 +33,13 @@ import org.koin.android.ext.android.inject
 class HomeFragment : Fragment(), StatesRecyclerAdapter.StateClickListener {
 
     private val viewModel: HomeViewModel by inject()
+    private val remoteConfig: FirebaseRemoteConfig by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        remoteConfig.fetchAndActivate()
         return inflater.inflate(R.layout.home_fragment, container, false)
     }
 
@@ -80,7 +84,7 @@ class HomeFragment : Fragment(), StatesRecyclerAdapter.StateClickListener {
         })
         displayMap()
         self_assesment_card.setOnClickListener {
-            val webUrl = "https://covid.apollo247.com/"
+            val webUrl = remoteConfig.getString(Constants.SELF_CHECK_URL)
             val builder = CustomTabsIntent.Builder()
             builder.setToolbarColor(ContextCompat.getColor(this@HomeFragment.requireContext(), R.color.colorPrimary))
             builder.addDefaultShareMenuItem()
@@ -113,7 +117,7 @@ class HomeFragment : Fragment(), StatesRecyclerAdapter.StateClickListener {
     }
 
     private fun displayMap() {
-        val mapUrl = MapDetailFragment.MAP_URL
+        val mapUrl = remoteConfig.getString(Constants.WORLD_MAP_URL)
         affected_web_view.settings.javaScriptEnabled = true // enable javascript
         affected_web_view.webViewClient = object: WebViewClient() {
             override fun onReceivedError(

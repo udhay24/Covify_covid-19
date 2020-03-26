@@ -1,6 +1,11 @@
 package com.udhay.helfycovid_19.di
 
 import android.content.Context
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
+import com.google.firebase.remoteconfig.RemoteConfigComponent
+import com.udhay.helfycovid_19.R
+import com.udhay.helfycovid_19.util.Constants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.BuildConfig
@@ -10,8 +15,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import twitter4j.Twitter
 import twitter4j.TwitterFactory
-
 import twitter4j.conf.ConfigurationBuilder
+
 
 private val covidApiClient: (context: Context) -> OkHttpClient = { context ->
     OkHttpClient()
@@ -38,18 +43,36 @@ val networkModule = module {
     single {
         retrofit(androidContext())
     }
-    single<Twitter> {
-        twitter()
+
+    single {
+        getFirebaseRemoteConfig()
+    }
+
+    single {
+        getTwitterClient(
+            remoteConfig = get()
+        )
     }
 }
 
-private val twitter: () -> Twitter = {
+private fun getTwitterClient(remoteConfig: FirebaseRemoteConfig): Twitter {
     val cb = ConfigurationBuilder()
     cb.setDebugEnabled(true)
-        .setOAuthConsumerKey("vYg4Yz8FXcarulLbBZyOzd9fj")
-        .setOAuthConsumerSecret("a7byq5DZHbn1RHqa7MfmfAULWaLkuKV8IvEtAiIDFgm89UNJGH")
-        .setOAuthAccessToken("1068147708546826240-Yms0PDeEqv0gfCdR7Bv2YSdrWKiFCa")
-        .setOAuthAccessTokenSecret("E6680IkSxv0xYCgZ8AnVjkFD0oNylMDjpp3rEAFSa0As9")
+        .setOAuthConsumerKey(remoteConfig.getString(Constants.O_AUTH_CONSUMER_KEY))
+        .setOAuthConsumerSecret(remoteConfig.getString(Constants.O_AUTH_CONSUMER_KEY_SECRET))
+        .setOAuthAccessToken(remoteConfig.getString(Constants.O_AUTH_ACCESS_TOKEN))
+        .setOAuthAccessTokenSecret(remoteConfig.getString(Constants.O_AUTH_ACCESS_TOKEN_SECRET))
     val tf = TwitterFactory(cb.build())
-    tf.instance
+    return tf.instance
+}
+
+private fun getFirebaseRemoteConfig(): FirebaseRemoteConfig  {
+    val mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
+    val configSettings = FirebaseRemoteConfigSettings.Builder()
+        .setMinimumFetchIntervalInSeconds(3600)
+        .build()
+    mFirebaseRemoteConfig.setConfigSettingsAsync(configSettings)
+
+    mFirebaseRemoteConfig.setDefaultsAsync(R.xml.remote_config)
+    return mFirebaseRemoteConfig
 }

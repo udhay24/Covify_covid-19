@@ -150,7 +150,7 @@ class GraphRecyclerAdapter(
 
         @ExperimentalStdlibApi
         fun showFrequencyChart() {
-            val timeFormat = SimpleDateFormat("dd/MMM/yyyy", Locale.ENGLISH)
+            val timeFormat = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
             val confirmedData =
                 timeFrequencyModel.cases.map { it.confirmedCases }.scanReduce { acc, i -> acc + i }
             val recoveredCases =

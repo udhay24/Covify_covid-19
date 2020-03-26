@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "559456321564",
+    "firebase_url": "https://helfy-covid-19.firebaseio.com",
+    "project_id": "helfy-covid-19",
+    "storage_bucket": "helfy-covid-19.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:559456321564:android:32ec73429f1b00a80b9fd9",
+        "android_client_info": {
+          "package_name": "com.udhay.helfycovid_19"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "559456321564-8gp39rudbn2cngviitsa1ih71v32p0de.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.udhay.helfycovid_19",
+            "certificate_hash": "95b99a5d4373759af485e9f11d15b346e35d2d9a"
+          }
+        },
+        {
+          "client_id": "559456321564-rh8nmok92i4onk1lla24d3ljukhfuhjv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD90PUQ9b_6r_vmoHHFt5eSsOYQFZSlCBM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "559456321564-rh8nmok92i4onk1lla24d3ljukhfuhjv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
