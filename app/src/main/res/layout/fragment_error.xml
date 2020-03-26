@@ -13,29 +13,36 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="128dp"
         android:layout_marginEnd="16dp"
+        android:src="@drawable/error_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars" />
+        />
 
     <TextView
         android:id="@+id/error_message_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:fontFamily="@font/aladin"
+        android:gravity="center"
+        android:text="Don't be a \n confused caveman"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:typeface="sans"
         app:layout_constraintEnd_toEndOf="@+id/error_image"
         app:layout_constraintStart_toStartOf="@+id/error_image"
-        app:layout_constraintTop_toBottomOf="@+id/error_image"
-        android:text="Don't be a \n confused caveman"
-        android:gravity="center"/>
+        app:layout_constraintTop_toBottomOf="@+id/error_image" />
 
     <TextView
         android:id="@+id/error_message_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="It's just that you lost your \n Internet Connection"
+        android:fontFamily="sans-serif-condensed"
         android:gravity="center"
+        android:text="It's just that you lost your \n Internet Connection"
         app:layout_constraintEnd_toEndOf="@+id/error_message_1"
         app:layout_constraintStart_toStartOf="@+id/error_message_1"
         app:layout_constraintTop_toBottomOf="@+id/error_message_1" />
@@ -45,8 +52,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:background="@drawable/error_button"
+        android:padding="14dp"
         android:text="TRY AGAIN"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/error_message_2"
         app:layout_constraintStart_toStartOf="@+id/error_message_2"
-        app:layout_constraintTop_toBottomOf="@+id/error_message_2" />
+        app:layout_constraintTop_toBottomOf="@+id/error_message_2"
+        android:paddingHorizontal="24dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

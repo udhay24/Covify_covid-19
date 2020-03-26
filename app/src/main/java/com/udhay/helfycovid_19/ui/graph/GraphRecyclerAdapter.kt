@@ -1,4 +1,4 @@
-package com.udhay.helfycovid_19.ui.detail_country
+package com.udhay.helfycovid_19.ui.graph
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -86,28 +86,30 @@ class GraphRecyclerAdapter(
             view.pie_chart.transparentCircleRadius = 61f
 
             view.pie_chart.setDrawCenterText(true)
-            view.pie_chart.rotationAngle = 180f
             view.pie_chart.isRotationEnabled = false
             view.pie_chart.isHighlightPerTapEnabled = true
-
+            view.pie_chart.setDrawEntryLabels(false)
+            view.pie_chart.setTouchEnabled(true)
             view.pie_chart.animateY(1400, Easing.EaseInOutQuart)
 
             val l: Legend = view.pie_chart.getLegend()
-            l.verticalAlignment = Legend.LegendVerticalAlignment.TOP
+            l.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
             l.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
-            l.orientation = Legend.LegendOrientation.VERTICAL
-            l.setDrawInside(false)
-            l.isEnabled = false
+            l.orientation = Legend.LegendOrientation.HORIZONTAL
+            l.setDrawInside(true)
+            l.textColor = Color.WHITE
+            l.isEnabled = true
 
 
             val pieDataset = PieDataSet(listOf(
-                PieEntry(distributionModel.deaths.toFloat(), "Deaths"),
                 PieEntry(distributionModel.hospitalizedCases.toFloat(), "Hospitals"),
-                PieEntry(distributionModel.recoveredCases.toFloat(), "Recovered")
+                PieEntry(distributionModel.recoveredCases.toFloat(), "Recovered"),
+                PieEntry(distributionModel.deaths.toFloat(), "Deaths")
             ), "Cases Distribution")
 
             pieDataset.sliceSpace = 3f
             pieDataset.selectionShift = 5f
+            pieDataset.setDrawValues(true)
 
             // add a lot of colors
             val colors = ArrayList<Int>()
@@ -118,11 +120,19 @@ class GraphRecyclerAdapter(
 
 //            for (c in ColorTemplate.COLORFUL_COLORS) colors.add(c)
 //
-            for (c in ColorTemplate.LIBERTY_COLORS) colors.add(c)
+//            for (c in ColorTemplate.LIBERTY_COLORS) colors.add(c)
 
 //            for (c in ColorTemplate.PASTEL_COLORS) colors.add(c)
 
-            colors.add(ColorTemplate.getHoloBlue())
+            colors.add(
+                Color.parseColor("#f0a8c0")
+            )
+            colors.add(
+                Color.parseColor("#00BFA5")
+            )
+            colors.add(
+                Color.parseColor("#ACACAC")
+            )
 
             pieDataset.colors = colors
 
@@ -314,9 +324,6 @@ class GraphRecyclerAdapter(
             val numberSize = distributionModel.confirmedCases.toString().count()
             val s = SpannableString("Total Confirmed Cases : \n ${distributionModel.confirmedCases}")
             s.setSpan(RelativeSizeSpan(1.0f), 0, 24, 0)
-            s.setSpan(StyleSpan(Typeface.NORMAL), 14, s.length - 15, 0)
-            s.setSpan(ForegroundColorSpan(Color.GRAY), 14, s.length - 15, 0)
-            s.setSpan(RelativeSizeSpan(1.65f), 14, s.length - 15, 0)
             s.setSpan(StyleSpan(Typeface.ITALIC), s.length - numberSize, s.length, 0)
             s.setSpan(ForegroundColorSpan(ColorTemplate.getHoloBlue()), s.length - numberSize, s.length, 0)
             return s

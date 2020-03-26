@@ -1,4 +1,4 @@
-package com.udhay.helfycovid_19.ui.detail_country
+package com.udhay.helfycovid_19.ui.graph
 
 import android.os.Bundle
 import android.view.LayoutInflater

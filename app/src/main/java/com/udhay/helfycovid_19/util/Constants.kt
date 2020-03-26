@@ -7,4 +7,5 @@ object Constants {
     const val O_AUTH_CONSUMER_KEY_SECRET = "o_auth_consumer_secret"
     const val WORLD_MAP_URL = "world_map"
     const val SELF_CHECK_URL = "self_check_url"
+    const val TWITTER_HANDLE = "twitter_handle"
 }

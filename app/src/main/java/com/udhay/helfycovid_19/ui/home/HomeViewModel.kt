@@ -1,5 +1,6 @@
 package com.udhay.helfycovid_19.ui.home
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,6 +10,7 @@ import com.udhay.helfycovid_19.data.model.CountryModel
 import com.udhay.helfycovid_19.data.model.StateModel
 import com.udhay.helfycovid_19.data.model.WorldModel
 import com.udhay.helfycovid_19.util.Resource
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,6 +20,14 @@ class HomeViewModel(
     private val casesRepository: CasesRepository
 ) : ViewModel(), CoroutineScope {
 
+    private val exceptionHandler: CoroutineExceptionHandler
+    init {
+         exceptionHandler = CoroutineExceptionHandler { _, error ->
+            Log.e("Home View model", error.message ?: "")
+        }
+
+        retryData() //load the data for the first time
+    }
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Default
 
@@ -27,7 +37,7 @@ class HomeViewModel(
     val stateCount: MutableLiveData<Resource<StateModel, Exception>> = MutableLiveData()
 
     fun retryData() {
-        launch {
+        launch(exceptionHandler) {
             postCountryData()
             postStateData()
         }

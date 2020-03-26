@@ -2,30 +2,30 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="220dp"
     android:layout_height="250dp"
-    app:cardCornerRadius="8dp"
-    android:stateListAnimator="@animator/click_animation"
+    android:layout_margin="16dp"
     android:elevation="5dp"
-    android:layout_width="200dp"
-    android:layout_margin="16dp">
+    android:stateListAnimator="@animator/click_animation"
+    app:cardCornerRadius="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_Layout"
-        android:background="@drawable/round_purple_border"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/round_purple_border">
 
         <TextView
-            android:letterSpacing="0.01"
-            android:textColor="@color/textGrey"
             android:id="@+id/state_title_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="32dp"
             android:fontFamily="serif"
+            android:letterSpacing="0.01"
             android:text="TextView"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/textGrey"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -60,8 +60,6 @@
             tools:text="98" />
 
         <TextView
-            android:drawablePadding="3dp"
-            android:textColor="@color/textGrey"
             android:id="@+id/detail_button"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
@@ -69,10 +67,12 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="16dp"
-            android:drawableTint="@color/textGrey"
             android:drawableEnd="@drawable/ic_next"
+            android:drawablePadding="3dp"
+            android:drawableTint="@color/textGrey"
             android:gravity="center"
             android:text="More"
+            android:textColor="@color/textGrey"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -92,36 +92,36 @@
             app:layout_constraintTop_toBottomOf="@+id/state_title_text_view" />
 
         <ImageView
-            android:tint="@color/purple"
-            app:srcCompat="@drawable/icon_fire"
             android:id="@+id/imageView4"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="32dp"
+            android:tint="@color/purple"
             app:layout_constraintEnd_toStartOf="@+id/view2"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view" />
+            app:layout_constraintTop_toBottomOf="@+id/view"
+            app:srcCompat="@drawable/icon_fire" />
 
         <ImageView
-            android:padding="2dp"
-            android:tint="@color/purple"
-            app:srcCompat="@drawable/icon_add"
             android:id="@+id/imageView5"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="32dp"
+            android:padding="2dp"
+            android:tint="@color/purple"
             app:layout_constraintEnd_toStartOf="@+id/view3"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/view2"
-            app:layout_constraintTop_toBottomOf="@+id/view" />
+            app:layout_constraintTop_toBottomOf="@+id/view"
+            app:srcCompat="@drawable/icon_add" />
 
         <ImageView
-            android:padding="2dp"
             android:id="@+id/imageView6"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="32dp"
+            android:padding="2dp"
             android:rotation="45"
             android:tint="@color/purple"
             app:layout_constraintEnd_toEndOf="parent"
@@ -131,13 +131,13 @@
             app:srcCompat="@drawable/icon_add" />
 
         <View
-            android:background="@color/textGrey"
-            android:alpha="0.1"
             android:id="@+id/view2"
             android:layout_width="2dp"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="10dp"
+            android:alpha="0.1"
+            android:background="@color/textGrey"
             app:layout_constraintBottom_toBottomOf="@+id/cases_text_view"
             app:layout_constraintEnd_toStartOf="@+id/imageView5"
             app:layout_constraintHorizontal_bias="0.5"
@@ -150,8 +150,8 @@
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="10dp"
-            android:background="@color/textGrey"
             android:alpha="0.1"
+            android:background="@color/textGrey"
             app:layout_constraintBottom_toBottomOf="@+id/death_text_view"
             app:layout_constraintEnd_toStartOf="@+id/imageView6"
             app:layout_constraintHorizontal_bias="0.5"
