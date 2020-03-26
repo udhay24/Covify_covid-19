@@ -2,7 +2,6 @@ package com.udhay.helfycovid_19.ui.twitter
 
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,6 @@ import com.udhay.helfycovid_19.R
 import com.udhay.helfycovid_19.util.round
 import kotlinx.android.synthetic.main.twitter_view_holder_layout.view.*
 import twitter4j.Status
-import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -82,10 +80,10 @@ class TwitterRecyclerAdapter(
             val days = TimeUnit.MILLISECONDS.toDays(difference)
 
             return when {
-                seconds in 0..60 -> "$seconds sec"
-                minutes in 1..60 -> "$minutes min"
-                hours in 1..24 -> "$hours hour"
-                else -> "$days days"
+                seconds in 0..60 -> "$seconds sec(s)"
+                minutes in 1..60 -> "$minutes min(s)"
+                hours in 1..24 -> "$hours hour(s)"
+                else -> "$days day(s)"
             }
         }
     }
