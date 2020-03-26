@@ -154,6 +154,8 @@ class GraphRecyclerAdapter(
 
             val chart: LineChart = view.line_chart
 
+            chart.setBackgroundColor(view.context.getColor(R.color.white))
+
             // disable description text
             chart.description.isEnabled = true
             chart.description = Description().apply {

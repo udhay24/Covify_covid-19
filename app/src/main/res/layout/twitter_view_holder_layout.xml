@@ -6,14 +6,14 @@
     android:background="@color/white"
     android:layout_marginEnd="10dp"
     android:layout_marginTop="10dp"
+    android:elevation="2dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="20dp">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/profile_icon"
@@ -28,25 +28,25 @@
         <TextView
             android:id="@+id/profile_name"
             android:layout_width="0dp"
+            android:layout_marginEnd="24dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
             android:text="-"
             android:textColor="@color/textGrey"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/likes_count"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/profile_icon"
             app:layout_constraintTop_toTopOf="@+id/profile_icon"
             tools:text="Modi" />
 
         <TextView
+            android:layout_marginBottom="24dp"
             android:id="@+id/tweet_body_text_view"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
             android:text="_"
@@ -56,13 +56,12 @@
             app:layout_constraintEnd_toStartOf="@+id/retweets_count"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tweet_time_text_view"
-            tools:text="Convinced @iamlaurenmusic was lying when she said she learned ‘The Joker’ last night because she owned that one 👏🏼🌟…" />
+            tools:text="Convinced @iamlaurenmusic was lying when she said she learned ‘The Joker’ last night because she owned that one 👏🏼🌟… when she said she learned ‘The Joker’ last night because she owned that one when she said she learned ‘The Joker’ last night because she owned that one" />
 
         <TextView
             android:id="@+id/tweet_time_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:textColor="@color/textGrey"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/profile_icon"
@@ -84,28 +83,39 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tweet_body_text_view" />
 
-        <TextView
-            android:id="@+id/likes_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="24dp"
-            app:layout_constraintBottom_toTopOf="@+id/retweets_count"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="123"
-            android:drawableEnd="@drawable/heart_24"
-            android:drawablePadding="8dp"
-            android:gravity="center"/>
+        <View
+            android:visibility="gone"
+            android:layout_width="1px"
+            android:layout_height="0dp"
+            android:layout_marginEnd="10dp"
+            android:alpha="0.2"
+            android:background="@color/textGrey"
+            app:layout_constraintBottom_toBottomOf="@+id/tweet_body_text_view"
+            app:layout_constraintEnd_toStartOf="@+id/retweets_count"
+            app:layout_constraintTop_toTopOf="@+id/tweet_body_text_view" />
 
         <TextView
+            android:background="@null"
+            android:id="@+id/likes_count"
+            android:layout_width="48dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="24dp"
+            android:drawableEnd="@drawable/icon_heart"
+            android:drawablePadding="10dp"
+            android:gravity="end"
+            android:textColor="#D50000"
+            app:layout_constraintBottom_toTopOf="@+id/retweets_count"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tweet_body_text_view"
+            tools:text="123" />
+
+        <TextView
+            android:textColor="#0091EA"
             android:id="@+id/retweets_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="18dp"
             android:drawableEnd="@drawable/twitter_retweet"
             app:layout_constraintBottom_toTopOf="@+id/twitter_icon"
             app:layout_constraintEnd_toEndOf="parent"
@@ -115,9 +125,9 @@
 
         <ImageView
             android:id="@+id/twitter_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="48dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -127,9 +137,9 @@
 
         <ImageView
             android:id="@+id/verified_flag"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="24dp"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="5dp"
             app:layout_constraintBottom_toBottomOf="@+id/tweet_time_text_view"
             app:layout_constraintStart_toEndOf="@+id/tweet_time_text_view"
             app:layout_constraintTop_toTopOf="@+id/tweet_time_text_view"
