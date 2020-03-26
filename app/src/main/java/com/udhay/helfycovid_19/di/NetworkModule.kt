@@ -69,7 +69,7 @@ private fun getTwitterClient(remoteConfig: FirebaseRemoteConfig): Twitter {
 private fun getFirebaseRemoteConfig(): FirebaseRemoteConfig  {
     val mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
     val configSettings = FirebaseRemoteConfigSettings.Builder()
-        .setMinimumFetchIntervalInSeconds(10)
+        .setMinimumFetchIntervalInSeconds(3600)
         .build()
     mFirebaseRemoteConfig.setConfigSettingsAsync(configSettings)
 

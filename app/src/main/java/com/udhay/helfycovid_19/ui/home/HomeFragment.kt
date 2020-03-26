@@ -2,6 +2,7 @@ package com.udhay.helfycovid_19.ui.home
 
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -56,6 +57,8 @@ class HomeFragment : Fragment(), StatesRecyclerAdapter.StateClickListener {
             when(countryData) {
                 is Resource.SuccessResponse ->  {
                     updateCountryInfo(countryData.body)
+                    updateProgressBar(countryData.body)
+
                     distribution_view_more_text.setOnClickListener {
                         val distributionData = GenericDistributionModel(
                             confirmedCases = countryData.body.confirmed_case,
@@ -146,6 +149,18 @@ class HomeFragment : Fragment(), StatesRecyclerAdapter.StateClickListener {
 
         map_detail_text_view.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_mapDetailFragment)
+        }
+    }
+
+    private fun updateProgressBar(data: CountryModel.CountryModelItem) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            total_cases_progress_bar.setProgress(100, true)
+            deaths_progress_bar.setProgress((data.death/data.confirmed_case) * 100 + 5, true)
+            recovered_progress_bar.setProgress((data.recovered/data.confirmed_case) * 100 + 5, true)
+        } else {
+            total_cases_progress_bar.progress = 100
+            deaths_progress_bar.progress = (data.death / data.confirmed_case) * 100 + 5
+            recovered_progress_bar.progress = (data.recovered / data.confirmed_case) * 100 + 5
         }
     }
 

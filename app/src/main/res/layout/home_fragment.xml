@@ -92,9 +92,9 @@
                     android:text="-"
                     android:textColor="@color/textGrey"
                     android:textSize="22sp"
-                    app:layout_constraintEnd_toEndOf="@+id/imageView"
-                    app:layout_constraintStart_toStartOf="@+id/imageView"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView"
+                    app:layout_constraintEnd_toEndOf="@+id/total_cases_progress_bar"
+                    app:layout_constraintStart_toStartOf="@+id/total_cases_progress_bar"
+                    app:layout_constraintTop_toBottomOf="@+id/total_cases_progress_bar"
                     tools:text="400" />
 
                 <TextView
@@ -137,7 +137,7 @@
                     app:srcCompat="@drawable/icon_add" />
 
                 <ProgressBar
-                    android:id="@+id/imageView"
+                    android:id="@+id/total_cases_progress_bar"
                     style="?android:attr/progressBarStyleHorizontal"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -145,7 +145,7 @@
                     android:background="@drawable/circle_shape"
                     android:indeterminate="false"
                     android:max="100"
-                    android:progress="65"
+                    android:progress="0"
                     android:progressDrawable="@drawable/circular_progress_bar"
                     app:layout_constraintEnd_toStartOf="@+id/imageView3"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -153,20 +153,21 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ProgressBar
+                    android:id="@+id/recovered_progress_bar"
                     style="?android:attr/progressBarStyleHorizontal"
                     android:layout_width="75dp"
                     android:layout_height="75dp"
                     android:background="@drawable/circle_shape"
                     android:indeterminate="false"
                     android:max="100"
-                    android:progress="65"
+                    android:progress="0"
                     android:progressDrawable="@drawable/circular_progress_bar"
                     android:tint="#a33983"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView"
+                    app:layout_constraintBottom_toBottomOf="@+id/total_cases_progress_bar"
+                    app:layout_constraintEnd_toStartOf="@+id/total_cases_progress_bar"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/imageView" />
+                    app:layout_constraintTop_toTopOf="@+id/total_cases_progress_bar" />
 
                 <ImageView
                     android:id="@+id/imageView2"
@@ -174,11 +175,11 @@
                     android:layout_height="75dp"
                     android:padding="20dp"
                     android:tint="#a33983"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView"
+                    app:layout_constraintBottom_toBottomOf="@+id/total_cases_progress_bar"
+                    app:layout_constraintEnd_toStartOf="@+id/total_cases_progress_bar"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/imageView"
+                    app:layout_constraintTop_toTopOf="@+id/total_cases_progress_bar"
                     app:srcCompat="@drawable/icon_fire" />
 
                 <ImageView
@@ -188,27 +189,28 @@
                     android:padding="22dp"
                     android:rotation="45"
                     android:tint="#a33983"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                    app:layout_constraintBottom_toBottomOf="@+id/total_cases_progress_bar"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/imageView"
-                    app:layout_constraintTop_toTopOf="@+id/imageView"
+                    app:layout_constraintStart_toEndOf="@+id/total_cases_progress_bar"
+                    app:layout_constraintTop_toTopOf="@+id/total_cases_progress_bar"
                     app:srcCompat="@drawable/icon_add" />
 
                 <ProgressBar
+                    android:id="@+id/deaths_progress_bar"
                     style="?android:attr/progressBarStyleHorizontal"
                     android:layout_width="75dp"
                     android:layout_height="75dp"
                     android:background="@drawable/circle_shape"
                     android:indeterminate="false"
                     android:max="100"
-                    android:progress="65"
+                    android:progress="0"
                     android:progressDrawable="@drawable/circular_progress_bar"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                    app:layout_constraintBottom_toBottomOf="@+id/total_cases_progress_bar"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/imageView"
-                    app:layout_constraintTop_toTopOf="@+id/imageView" />
+                    app:layout_constraintStart_toEndOf="@+id/total_cases_progress_bar"
+                    app:layout_constraintTop_toTopOf="@+id/total_cases_progress_bar" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
