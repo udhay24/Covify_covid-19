@@ -2,6 +2,12 @@
     <string name="app_name">helfy covid-19</string>
     <string name="title_activity_maps">Helfy</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="guideline_1">Do not panic!   Your essential needs will be taken care of. DO NOT HOARD.</string>
+    <string name="guideline_2">Be compassionate! Help those in need like the elderly and poor. They are facing a crisis you cannot even imagine!</string>
+    <string name="guideline_3">Plan and calculate your essential needs for the next three weeks and get only what is bare minimum needed.</string>
+    <string name="guideline_4">Lockdown means LOCKDOWN! Avoid going out unless absolutely necessary. Stay safe!</string>
+    <string name="dos"><![CDATA[# Practice frequent hand wash– ing. Wash hands with soap and water or use alcohol based hand rub. Wash hands even if they are visibly clean\n\n# Cover your nose and mouth with handkerchief/tissue while sneezing and coughing\n\n# Throw used tissues into closed bins immediately after use\n\n# See a doctor if you feel unwell (fever, difficult breathing and cough). While visiting doctor wear a mask/cloth to cover your mouth and nose\n\n# If you have these signs/symptoms please call State helpline number or Ministry of Health & Family Welfareʼs 24X7 helpline at 011–23978046\n\n# Avoid participating in large gatherings]]></string>
+    <string name="guideline_5">Help out your workers and domestic workers by not cutting their salaries. Show the true Indian spirit!</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dont"># Have a close contact with anyone, if youʼre experiencing cough and fever\n\n# Touch your eyes, nose and mouth\n\n# Spit in public</string>
 </resources>

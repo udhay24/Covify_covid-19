@@ -118,4 +118,7 @@ dependencies {
     //animation
     implementation 'com.airbnb.android:lottie:3.0.7'
 
+    //carousel view
+    implementation 'com.synnapps:carouselview:0.1.5'
+
 }
