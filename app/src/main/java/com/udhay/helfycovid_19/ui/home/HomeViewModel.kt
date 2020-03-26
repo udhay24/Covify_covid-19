@@ -31,7 +31,7 @@ class HomeViewModel(
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Default
 
-    val countryCount: MutableLiveData<Resource<CountryModel.CountryCountModelItem, Exception>> =
+    val countryCount: MutableLiveData<Resource<CountryModel.CountryModelItem, Exception>> =
         MutableLiveData()
 
     val stateCount: MutableLiveData<Resource<StateModel, Exception>> = MutableLiveData()

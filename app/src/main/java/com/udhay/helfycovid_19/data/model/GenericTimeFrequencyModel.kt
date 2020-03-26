@@ -9,6 +9,7 @@ data class GenericTimeFrequencyModel(
         val date: String,
         val confirmedCases: Int,
         val recovered: Int,
+        val hospitalizedCases: Int,
         val deaths: Int
     )
 }

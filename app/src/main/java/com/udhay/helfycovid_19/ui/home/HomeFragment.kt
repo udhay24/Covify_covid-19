@@ -67,7 +67,7 @@ class HomeFragment : Fragment(), StatesRecyclerAdapter.StateClickListener {
                         val frequencyModel = GenericTimeFrequencyModel(
                             countryData.body.datewise_data.map {
                                 GenericTimeFrequencyModel.TimeCases(
-                                    it.date, it.hospitalised_case, it.recovered, it.death
+                                    it.date, it.confirmed_case, it.recovered,it.hospitalised_case, it.death
                                 )
                             }
                         )
@@ -115,7 +115,7 @@ class HomeFragment : Fragment(), StatesRecyclerAdapter.StateClickListener {
 
     }
 
-    private fun updateCountryInfo(countryModel: CountryModel.CountryCountModelItem) {
+    private fun updateCountryInfo(countryModel: CountryModel.CountryModelItem) {
         cases_text_view.text = countryModel.confirmed_case.toString()
         recovered_text_view.text = countryModel.recovered.toString()
         deaths_text_view.text = countryModel.death.toString()
@@ -160,7 +160,7 @@ class HomeFragment : Fragment(), StatesRecyclerAdapter.StateClickListener {
         val timeFrequencyModel = GenericTimeFrequencyModel(
             state.datewise_data.map {
                 GenericTimeFrequencyModel.TimeCases(
-                    it.date, it.confirmed_case, it.recovered, it.death
+                    it.date, it.confirmed_case, it.recovered, it.hospitalised_case, it.death
                 )
             }
         )
