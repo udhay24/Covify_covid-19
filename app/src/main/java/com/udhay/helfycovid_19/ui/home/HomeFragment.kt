@@ -100,6 +100,10 @@ class HomeFragment : Fragment(), StatesRecyclerAdapter.StateClickListener {
         world_map_card.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_mapDetailFragment)
         }
+
+        guideline_card.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_whoGuideLinesFragment)
+        }
     }
 
     private fun updateCountryInfo(countryModel: CountryModel.CountryCountModelItem) {
