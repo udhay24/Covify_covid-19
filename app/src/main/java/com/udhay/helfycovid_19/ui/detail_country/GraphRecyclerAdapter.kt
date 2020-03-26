@@ -34,7 +34,6 @@ import kotlinx.android.synthetic.main.line_chart_graph.view.*
 import kotlinx.android.synthetic.main.pie_chart_graph.view.*
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.logging.SimpleFormatter
 
 
 class GraphRecyclerAdapter(
@@ -67,6 +66,7 @@ class GraphRecyclerAdapter(
 
 
         fun showDistributionGraph(distributionModel: GenericDistributionModel) {
+            view.total_confirmed_text_view.text = distributionModel.confirmedCases.toString()
             view.pie_chart.setUsePercentValues(true)
             view.pie_chart.description.isEnabled = false
             view.pie_chart.setExtraOffsets(5f, 10f, 5f, 5f)
@@ -87,17 +87,11 @@ class GraphRecyclerAdapter(
 
             view.pie_chart.setDrawCenterText(true)
 
-            view.pie_chart.rotationAngle = 20f
-            // enable rotation of the pie_chart by touch
-            // enable rotation of the pie_chart by touch
-            view.pie_chart.isRotationEnabled = true
+            view.pie_chart.isRotationEnabled = false
             view.pie_chart.isHighlightPerTapEnabled = true
 
-
             view.pie_chart.animateY(1400, Easing.EaseInOutQuart)
-            // chart.spin(2000, 0, 360);
 
-            // chart.spin(2000, 0, 360);
             val l: Legend = view.pie_chart.getLegend()
             l.verticalAlignment = Legend.LegendVerticalAlignment.TOP
             l.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
@@ -107,7 +101,6 @@ class GraphRecyclerAdapter(
 
 
             val pieDataset = PieDataSet(listOf(
-                PieEntry(distributionModel.confirmedCases.toFloat(), "Confirmed"),
                 PieEntry(distributionModel.deaths.toFloat(), "Deaths"),
                 PieEntry(distributionModel.hospitalizedCases.toFloat(), "Hospitals"),
                 PieEntry(distributionModel.recoveredCases.toFloat(), "Recovered")
@@ -115,31 +108,30 @@ class GraphRecyclerAdapter(
 
             pieDataset.sliceSpace = 3f
             pieDataset.selectionShift = 5f
-            pieDataset.colors = ColorTemplate.JOYFUL_COLORS.toList()
 
             // add a lot of colors
-            val colors = java.util.ArrayList<Int>()
+            val colors = ArrayList<Int>()
 
-            for (c in ColorTemplate.VORDIPLOM_COLORS) colors.add(c)
+//            for (c in ColorTemplate.VORDIPLOM_COLORS) colors.add(c)
 
-            for (c in ColorTemplate.JOYFUL_COLORS) colors.add(c)
+//            for (c in ColorTemplate.JOYFUL_COLORS) colors.add(c)
 
-            for (c in ColorTemplate.COLORFUL_COLORS) colors.add(c)
-
+//            for (c in ColorTemplate.COLORFUL_COLORS) colors.add(c)
+//
             for (c in ColorTemplate.LIBERTY_COLORS) colors.add(c)
 
-            for (c in ColorTemplate.PASTEL_COLORS) colors.add(c)
+//            for (c in ColorTemplate.PASTEL_COLORS) colors.add(c)
 
             colors.add(ColorTemplate.getHoloBlue())
 
-            pieDataset.setColors(colors)
-            //pieDataset.setSelectionShift(0f);
+            pieDataset.colors = colors
 
+            pieDataset.selectionShift = 0f
+            pieDataset.yValuePosition = PieDataSet.ValuePosition.OUTSIDE_SLICE
 
-            //pieDataset.setSelectionShift(0f);
-            pieDataset.valueLinePart1OffsetPercentage = 80f
-            pieDataset.valueLinePart1Length = 0.2f
-            pieDataset.valueLinePart2Length = 0.4f
+            pieDataset.valueLinePart1OffsetPercentage = 90f
+            pieDataset.valueLinePart1Length = 0.10f
+            pieDataset.valueLinePart2Length = 0.50f
 
             val pieData = PieData(pieDataset)
             pieData.setValueFormatter(PercentFormatter())
@@ -317,13 +309,14 @@ class GraphRecyclerAdapter(
         }
 
         private fun generateCenterSpannableText(): SpannableString? {
-            val s = SpannableString("MPAndroidChart\ndeveloped by Philipp Jahoda")
-            s.setSpan(RelativeSizeSpan(1.5f), 0, 14, 0)
+            val numberSize = distributionModel.confirmedCases.toString().count()
+            val s = SpannableString("Total Confirmed Cases : \n ${distributionModel.confirmedCases}")
+            s.setSpan(RelativeSizeSpan(1.0f), 0, 24, 0)
             s.setSpan(StyleSpan(Typeface.NORMAL), 14, s.length - 15, 0)
             s.setSpan(ForegroundColorSpan(Color.GRAY), 14, s.length - 15, 0)
-            s.setSpan(RelativeSizeSpan(.65f), 14, s.length - 15, 0)
-            s.setSpan(StyleSpan(Typeface.ITALIC), s.length - 14, s.length, 0)
-            s.setSpan(ForegroundColorSpan(ColorTemplate.getHoloBlue()), s.length - 14, s.length, 0)
+            s.setSpan(RelativeSizeSpan(1.65f), 14, s.length - 15, 0)
+            s.setSpan(StyleSpan(Typeface.ITALIC), s.length - numberSize, s.length, 0)
+            s.setSpan(ForegroundColorSpan(ColorTemplate.getHoloBlue()), s.length - numberSize, s.length, 0)
             return s
 
         }
