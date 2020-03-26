@@ -11,7 +11,6 @@ import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.widget.Toast
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -25,6 +24,7 @@ import com.udhay.helfycovid_19.data.model.GenericTimeFrequencyModel
 import com.udhay.helfycovid_19.data.model.StateModel
 import com.udhay.helfycovid_19.util.Constants
 import com.udhay.helfycovid_19.util.Resource
+import com.udhay.helfycovid_19.util.isNetworkAvailable
 import kotlinx.android.synthetic.main.home_fragment.*
 import kotlinx.android.synthetic.main.more_covid_tasks.*
 import org.koin.android.ext.android.inject
@@ -39,6 +39,9 @@ class HomeFragment : Fragment(), StatesRecyclerAdapter.StateClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        if (!isNetworkAvailable(requireContext())) {
+            findNavController().navigate(R.id.action_homeFragment_to_errorFragment)
+        }
         remoteConfig.fetchAndActivate()
         return inflater.inflate(R.layout.home_fragment, container, false)
     }
@@ -109,6 +112,7 @@ class HomeFragment : Fragment(), StatesRecyclerAdapter.StateClickListener {
         guideline_card.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_whoGuideLinesFragment)
         }
+
     }
 
     private fun updateCountryInfo(countryModel: CountryModel.CountryCountModelItem) {
@@ -134,7 +138,7 @@ class HomeFragment : Fragment(), StatesRecyclerAdapter.StateClickListener {
                 error: WebResourceError?
             ) {
                 super.onReceivedError(view, request, error)
-                Toast.makeText(this@HomeFragment.requireContext(), error?.description, Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this@HomeFragment.requireContext(), error?.description, Toast.LENGTH_SHORT).show()
             }
         }
         affected_web_view.loadUrl(mapUrl)

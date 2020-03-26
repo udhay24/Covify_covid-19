@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_homeFragment_to_whoGuideLinesFragment"
             app:destination="@id/whoGuideLinesFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_errorFragment"
+            app:destination="@id/errorFragment" />
     </fragment>
     <fragment
         android:id="@+id/mapDetailFragment"
@@ -50,4 +53,17 @@
         android:name="com.udhay.helfycovid_19.ui.guidelines.WHOGuideLinesFragment"
         android:label="who_guidelines_fragment"
         tools:layout="@layout/fragment_who_guide_lines"/>
+
+    <fragment
+        android:id="@+id/errorFragment"
+        android:name="com.udhay.helfycovid_19.ui.error.ErrorFragment"
+        android:label="error_fragment"
+        tools:layout="@layout/fragment_error">
+        <action
+            android:id="@+id/action_errorFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/errorFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
 </navigation>
