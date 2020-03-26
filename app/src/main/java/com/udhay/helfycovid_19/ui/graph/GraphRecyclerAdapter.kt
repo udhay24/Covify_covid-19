@@ -139,7 +139,7 @@ class GraphRecyclerAdapter(
             pieDataset.selectionShift = 0f
             pieDataset.yValuePosition = PieDataSet.ValuePosition.OUTSIDE_SLICE
 
-//            pieDataset.valueLinePart1OffsetPercentage = 90f
+            pieDataset.valueLinePart1OffsetPercentage = 90f
             pieDataset.valueLinePart1Length = 0.10f
             pieDataset.valueLinePart2Length = 0.50f
 
