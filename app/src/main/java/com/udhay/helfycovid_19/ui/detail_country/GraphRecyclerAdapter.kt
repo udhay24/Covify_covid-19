@@ -44,8 +44,8 @@ class GraphRecyclerAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val view: View = when(viewType) {
-            0 -> LayoutInflater.from(parent.context).inflate(R.layout.pie_chart_graph, parent, false)
-            1 -> LayoutInflater.from(parent.context).inflate(R.layout.line_chart_graph, parent, false)
+            0 -> LayoutInflater.from(parent.context).inflate(R.layout.line_chart_graph, parent, false)
+            1 -> LayoutInflater.from(parent.context).inflate(R.layout.pie_chart_graph, parent, false)
             else -> View(parent.context)
         }
         return Holder(view)
@@ -58,12 +58,12 @@ class GraphRecyclerAdapter(
     @ExperimentalStdlibApi
     override fun onBindViewHolder(holder: Holder, position: Int) {
         when(position) {
-            0 -> holder.showDistributionGraph(distributionModel)
-            1 -> holder.showFrequencyChart()
+            0 -> holder.showFrequencyChart()
+            1 -> holder.showDistributionGraph(distributionModel)
         }
     }
 
-    inner class Holder(val view: View): RecyclerView.ViewHolder(view) {
+    inner class Holder(private val view: View): RecyclerView.ViewHolder(view) {
 
 
         fun showDistributionGraph(distributionModel: GenericDistributionModel) {
