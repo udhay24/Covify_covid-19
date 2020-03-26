@@ -38,11 +38,6 @@ class TwitterFragment : Fragment() {
     }
 
     private fun populateTwitterFeeds(feeds: List<Status>) {
-        val dividerItemDecoration = DividerItemDecoration(
-            twitter_recycler_view.context,
-            GridLayoutManager.HORIZONTAL
-        )
-        twitter_recycler_view.addItemDecoration(dividerItemDecoration)
         twitter_recycler_view.adapter =
             TwitterRecyclerAdapter(feeds)
     }

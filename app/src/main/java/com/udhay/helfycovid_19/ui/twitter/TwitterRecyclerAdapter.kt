@@ -1,13 +1,17 @@
 package com.udhay.helfycovid_19.ui.twitter
 
+import android.R.attr.radius
 import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.shape.RoundedCornerTreatment
 import com.squareup.picasso.Picasso
+import com.squareup.picasso.Transformation
 import com.udhay.helfycovid_19.R
+import com.udhay.helfycovid_19.util.RoundedCornersTransform
 import com.udhay.helfycovid_19.util.round
 import kotlinx.android.synthetic.main.twitter_view_holder_layout.view.*
 import twitter4j.Status
@@ -47,6 +51,7 @@ class TwitterRecyclerAdapter(
 
             Picasso.get()
                 .load(tweet.user.originalProfileImageURL.trim())
+                .transform(RoundedCornersTransform())
                 .fit()
                 .centerCrop()
                 .into(view.profile_icon)
