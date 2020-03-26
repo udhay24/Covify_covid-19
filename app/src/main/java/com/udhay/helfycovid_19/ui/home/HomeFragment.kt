@@ -138,7 +138,7 @@ class HomeFragment : Fragment(), StatesRecyclerAdapter.StateClickListener {
         )
 
         val timeFrequencyModel = GenericTimeFrequencyModel(
-            state.datewise_data.filterNotNull().map {
+            state.datewise_data.map {
                 GenericTimeFrequencyModel.TimeCases(
                     it.date, it.confirmed_case, it.recovered, it.death
                 )

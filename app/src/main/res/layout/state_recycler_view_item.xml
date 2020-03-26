@@ -35,7 +35,7 @@
             android:textStyle="bold"
             android:textSize="16sp"
             android:textColor="@color/textGrey"
-            android:id="@+id/cases_text_view"
+            android:id="@+id/recovered_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -46,7 +46,7 @@
             tools:text="400" />
 
         <TextView
-            android:id="@+id/death_text_view"
+            android:id="@+id/cases_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -159,7 +159,7 @@
             app:layout_constraintTop_toTopOf="@+id/imageView5" />
 
         <TextView
-            android:id="@+id/recovered_text_view"
+            android:id="@+id/death_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
