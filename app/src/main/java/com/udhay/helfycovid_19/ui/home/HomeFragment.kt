@@ -92,6 +92,10 @@ class HomeFragment : Fragment(), StatesRecyclerAdapter.StateClickListener {
         twitter_card.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_twitterFragment)
         }
+
+        world_map_card.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_mapDetailFragment)
+        }
     }
 
 
