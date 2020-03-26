@@ -12,7 +12,6 @@ import twitter4j.*
 import java.util.stream.Collectors
 
 
-val TWEETS_HANDLE = listOf("PIB_India", "HRDMinistry", "MoHFW_INDIA")
 class TwitterRepository(
     private val twitter: Twitter
 ) {
@@ -34,9 +33,9 @@ class TwitterRepository(
         }
     }
 
-    suspend fun getTweetsFromMixedHandles(): Response<List<Status>> {
+    suspend fun getTweetsFromMixedHandles(handles: List<String>): Response<List<Status>> {
         val combinedTweets: MutableList<Status> = mutableListOf()
-        TWEETS_HANDLE.forEach {
+        handles.forEach {
             try {
                val result = getTweetsFromHandle(it)
                 combinedTweets.addAll(result)

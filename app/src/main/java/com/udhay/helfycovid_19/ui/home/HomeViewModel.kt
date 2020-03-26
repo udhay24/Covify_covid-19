@@ -18,6 +18,9 @@ class HomeViewModel(
     private val casesRepository: CasesRepository
 ) : ViewModel(), CoroutineScope {
 
+    init {
+        retryData() //load the data for the first time
+    }
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Default
 

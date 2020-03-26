@@ -18,9 +18,9 @@
         <action
             android:id="@+id/action_homeFragment_to_twitterFragment"
             app:destination="@id/twitterFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_whoGuideLinesFragment"
-            app:destination="@id/whoGuideLinesFragment" />
+<!--        <action-->
+<!--            android:id="@+id/action_homeFragment_to_whoGuideLinesFragment"-->
+<!--            app:destination="@id/whoGuideLinesFragment" />-->
         <action
             android:id="@+id/action_homeFragment_to_errorFragment"
             app:destination="@id/errorFragment" />
@@ -32,7 +32,7 @@
         tools:layout="@layout/fragment_map_detail" />
     <fragment
         android:id="@+id/detailCountryFragment"
-        android:name="com.udhay.helfycovid_19.ui.detail_country.GraphFragment"
+        android:name="com.udhay.helfycovid_19.ui.graph.GraphFragment"
         android:label="detail_country_fragment"
         tools:layout="@layout/graph_fragment" >
         <argument
@@ -48,11 +48,11 @@
         android:label="twitter_fragment"
         tools:layout="@layout/twitter_fragment" />
 
-    <fragment
-        android:id="@+id/whoGuideLinesFragment"
-        android:name="com.udhay.helfycovid_19.ui.guidelines.WHOGuideLinesFragment"
-        android:label="who_guidelines_fragment"
-        tools:layout="@layout/fragment_who_guide_lines"/>
+<!--    <fragment-->
+<!--        android:id="@+id/whoGuideLinesFragment"-->
+<!--        android:name="com.udhay.helfycovid_19.ui.guidelines.WHOGuideLinesFragment"-->
+<!--        android:label="who_guidelines_fragment"-->
+<!--        tools:layout="@layout/fragment_who_guide_lines"/>-->
 
     <fragment
         android:id="@+id/errorFragment"

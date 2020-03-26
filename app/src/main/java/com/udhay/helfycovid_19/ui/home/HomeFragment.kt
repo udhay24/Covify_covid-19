@@ -110,7 +110,7 @@ class HomeFragment : Fragment(), StatesRecyclerAdapter.StateClickListener {
         }
 
         guideline_card.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_whoGuideLinesFragment)
+//            findNavController().navigate(R.id.action_homeFragment_to_whoGuideLinesFragment)
         }
 
     }

@@ -14,7 +14,8 @@ val viewModelModule = module {
 
     viewModel {
         TwitterViewModel(
-            twitterRepository = get()
+            twitterRepository = get(),
+            remoteConfig = get()
         )
     }
 }
