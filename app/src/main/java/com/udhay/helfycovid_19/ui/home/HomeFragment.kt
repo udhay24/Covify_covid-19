@@ -102,7 +102,6 @@ class HomeFragment : Fragment(), StatesRecyclerAdapter.StateClickListener {
         }
     }
 
-
     private fun updateCountryInfo(countryModel: CountryModel.CountryCountModelItem) {
         cases_text_view.text = countryModel.confirmed_case.toString()
         recovered_text_view.text = countryModel.recovered.toString()
