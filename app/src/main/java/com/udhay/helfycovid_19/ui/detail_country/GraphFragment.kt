@@ -25,27 +25,27 @@ class GraphFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         graph_view_pager.adapter = GraphRecyclerAdapter(dataArgs.distributionData, dataArgs.frequencyModel)
-        val pageMargin = 10
-        val pageOffset = 30
-
-        graph_view_pager.setPageTransformer { page, position ->
-            val myOffset: Float = position * -(2 * pageOffset + pageMargin)
-            when {
-                position < -1 -> {
-                    page.translationX = -myOffset
-                }
-                position <= 1 -> {
-                    val scaleFactor =
-                        0.7f.coerceAtLeast(1 - abs(position - 0.14285715f))
-                    page.translationX = myOffset
-                    page.scaleY = scaleFactor
-                    page.alpha = scaleFactor
-                }
-                else -> {
-                    page.alpha = 0f
-                    page.translationX = myOffset
-                }
-            }
-        }
+//        val pageMargin = 10
+//        val pageOffset = 30
+//
+//        graph_view_pager.setPageTransformer { page, position ->
+//            val myOffset: Float = position * -(2 * pageOffset + pageMargin)
+//            when {
+//                position < -1 -> {
+//                    page.translationX = -myOffset
+//                }
+//                position <= 1 -> {
+//                    val scaleFactor =
+//                        0.7f.coerceAtLeast(1 - abs(position - 0.14285715f))
+//                    page.translationX = myOffset
+//                    page.scaleY = scaleFactor
+//                    page.alpha = scaleFactor
+//                }
+//                else -> {
+//                    page.alpha = 0f
+//                    page.translationX = myOffset
+//                }
+//            }
+//        }
     }
 }

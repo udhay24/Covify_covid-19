@@ -1,26 +1,40 @@
 package com.udhay.helfycovid_19.ui.detail_country
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.graphics.Color
+import android.graphics.DashPathEffect
+import android.graphics.Typeface
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
+import android.text.style.RelativeSizeSpan
+import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.anychart.APIlib
-import com.anychart.AnyChart
-import com.anychart.chart.common.dataentry.DataEntry
-import com.anychart.chart.common.dataentry.ValueDataEntry
-import com.anychart.chart.common.listener.Event
-import com.anychart.chart.common.listener.ListenersInterface
-import com.anychart.charts.Cartesian
-import com.anychart.core.cartesian.series.Line
-import com.anychart.data.Mapping
-import com.anychart.graphics.vector.Stroke
+import com.github.mikephil.charting.animation.Easing
+import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.components.*
+import com.github.mikephil.charting.data.*
+import com.github.mikephil.charting.formatter.IFillFormatter
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.github.mikephil.charting.formatter.PercentFormatter
+import com.github.mikephil.charting.highlight.Highlight
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import com.github.mikephil.charting.utils.ColorTemplate
+import com.github.mikephil.charting.utils.MPPointF
+import com.github.mikephil.charting.utils.Utils
 import com.udhay.helfycovid_19.R
-import kotlinx.android.synthetic.main.graph_holder.view.*
-import com.anychart.data.Set;
-import com.anychart.enums.*
 import com.udhay.helfycovid_19.data.model.GenericDistributionModel
 import com.udhay.helfycovid_19.data.model.GenericTimeFrequencyModel
+import kotlinx.android.synthetic.main.line_chart_graph.view.*
+import kotlinx.android.synthetic.main.pie_chart_graph.view.*
+import java.text.SimpleDateFormat
+import java.util.*
+import java.util.logging.SimpleFormatter
 
 
 class GraphRecyclerAdapter(
@@ -29,105 +43,324 @@ class GraphRecyclerAdapter(
 ): RecyclerView.Adapter<GraphRecyclerAdapter.Holder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.graph_holder, parent, false)
+        val view: View = when(viewType) {
+            1 -> LayoutInflater.from(parent.context).inflate(R.layout.pie_chart_graph, parent, false)
+            0 -> LayoutInflater.from(parent.context).inflate(R.layout.line_chart_graph, parent, false)
+            else -> View(parent.context)
+        }
         return Holder(view)
     }
 
+    override fun getItemViewType(position: Int): Int = position
+
     override fun getItemCount(): Int = 2
 
+    @ExperimentalStdlibApi
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        if (position == 0) {
-            holder.showCasesDistribution(distributionModel)
-        } else {
-            holder.showTimelineGraph(timeFrequencyModel)
+        when(position) {
+            1 -> holder.showDistributionGraph(distributionModel)
+            0 -> holder.showFrequencyChart()
         }
     }
 
     inner class Holder(val view: View): RecyclerView.ViewHolder(view) {
 
-        fun showCasesDistribution(distributionModel: GenericDistributionModel) {
-            val pie = AnyChart.pie()
-            APIlib.getInstance().setActiveAnyChartView(view.distribution_pie_chart)
 
-            pie.setOnClickListener(object :
-                ListenersInterface.OnClickListener(arrayOf("x", "value")) {
-                override fun onClick(event: Event) {
-                    Toast.makeText(
-                        view.context,
-                        event.data["x"].toString() + ":" + event.data["value"],
-                        Toast.LENGTH_SHORT
-                    ).show()
+        fun showDistributionGraph(distributionModel: GenericDistributionModel) {
+            view.pie_chart.setUsePercentValues(true)
+            view.pie_chart.description.isEnabled = false
+            view.pie_chart.setExtraOffsets(5f, 10f, 5f, 5f)
+            view.pie_chart.dragDecelerationFrictionCoef = 0.95f
+
+            view.pie_chart.centerText = generateCenterSpannableText()
+
+            view.pie_chart.setExtraOffsets(20f, 0f, 20f, 0f)
+
+            view.pie_chart.isDrawHoleEnabled = true
+            view.pie_chart.setHoleColor(Color.WHITE)
+
+            view.pie_chart.setTransparentCircleColor(Color.WHITE)
+            view.pie_chart.setTransparentCircleAlpha(110)
+
+            view.pie_chart.holeRadius = 58f
+            view.pie_chart.transparentCircleRadius = 61f
+
+            view.pie_chart.setDrawCenterText(true)
+
+            view.pie_chart.rotationAngle = 20f
+            // enable rotation of the pie_chart by touch
+            // enable rotation of the pie_chart by touch
+            view.pie_chart.isRotationEnabled = true
+            view.pie_chart.isHighlightPerTapEnabled = true
+
+
+            view.pie_chart.animateY(1400, Easing.EaseInOutQuart)
+            // chart.spin(2000, 0, 360);
+
+            // chart.spin(2000, 0, 360);
+            val l: Legend = view.pie_chart.getLegend()
+            l.verticalAlignment = Legend.LegendVerticalAlignment.TOP
+            l.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
+            l.orientation = Legend.LegendOrientation.VERTICAL
+            l.setDrawInside(false)
+            l.isEnabled = false
+
+
+            val pieDataset = PieDataSet(listOf(
+                PieEntry(distributionModel.confirmedCases.toFloat(), "Confirmed"),
+                PieEntry(distributionModel.deaths.toFloat(), "Deaths"),
+                PieEntry(distributionModel.hospitalizedCases.toFloat(), "Hospitals"),
+                PieEntry(distributionModel.recoveredCases.toFloat(), "Recovered")
+            ), "Cases Distribution")
+
+            pieDataset.sliceSpace = 3f
+            pieDataset.selectionShift = 5f
+            pieDataset.colors = ColorTemplate.JOYFUL_COLORS.toList()
+
+            // add a lot of colors
+            val colors = java.util.ArrayList<Int>()
+
+            for (c in ColorTemplate.VORDIPLOM_COLORS) colors.add(c)
+
+            for (c in ColorTemplate.JOYFUL_COLORS) colors.add(c)
+
+            for (c in ColorTemplate.COLORFUL_COLORS) colors.add(c)
+
+            for (c in ColorTemplate.LIBERTY_COLORS) colors.add(c)
+
+            for (c in ColorTemplate.PASTEL_COLORS) colors.add(c)
+
+            colors.add(ColorTemplate.getHoloBlue())
+
+            pieDataset.setColors(colors)
+            //pieDataset.setSelectionShift(0f);
+
+
+            //pieDataset.setSelectionShift(0f);
+            pieDataset.valueLinePart1OffsetPercentage = 80f
+            pieDataset.valueLinePart1Length = 0.2f
+            pieDataset.valueLinePart2Length = 0.4f
+
+            val pieData = PieData(pieDataset)
+            pieData.setValueFormatter(PercentFormatter())
+            pieData.setValueTextSize(11f)
+            pieData.setValueTextColor(Color.BLACK)
+            view.pie_chart.data = pieData
+        }
+
+        @ExperimentalStdlibApi
+        fun showFrequencyChart() {
+            val timeFormat = SimpleDateFormat("dd/MMM/yyyy", Locale.ENGLISH)
+            val confirmedData =
+                timeFrequencyModel.cases.map { it.confirmedCases }.scanReduce { acc, i -> acc + i }
+            val recoveredCases =
+                timeFrequencyModel.cases.map { it.recovered }.scanReduce { acc, i -> acc + i }
+            val deaths =
+                timeFrequencyModel.cases.map { it.deaths }.scanReduce { acc, i -> acc + i }
+
+            val dates = timeFrequencyModel.cases.map { timeFormat.parse(it.date)!!.time }
+
+            val chart: LineChart = view.line_chart
+
+            // background color
+            chart.setBackgroundColor(Color.WHITE)
+
+            // disable description text
+            chart.description.isEnabled = false
+
+            // enable touch gestures
+            chart.setTouchEnabled(true)
+
+            // set listeners
+            chart.setDrawGridBackground(false)
+            chart.axisLeft.setDrawGridLines(false)
+            chart.xAxis.setDrawGridLines(false)
+
+            val mv = MyMarkerView(view.context, R.layout.custom_marker_view)
+
+            // Set the marker to the chart
+            mv.chartView = chart
+            chart.marker = mv
+
+            // enable scaling and dragging
+            chart.isDragEnabled = true
+            chart.setScaleEnabled(true)
+            chart.isScaleXEnabled = true
+            chart.isScaleYEnabled = true
+
+            // force pinch zoom along both axis
+            chart.setPinchZoom(true)
+
+            val xAxis: XAxis
+            // // X-Axis Style // //
+            xAxis = chart.xAxis
+            xAxis.valueFormatter = object : IndexAxisValueFormatter() {
+                override fun getFormattedValue(value: Float): String {
+                    val date = Date(value.toLong())
+                    //Specify the format you'd like
+                    //Specify the format you'd like
+                    val sdf = SimpleDateFormat("MM/dd", Locale.ENGLISH)
+                    return sdf.format(date)
                 }
-            })
-
-            val data: MutableList<DataEntry> = ArrayList()
-            data.add(ValueDataEntry("Confirmed", distributionModel.confirmedCases))
-            data.add(ValueDataEntry("hospitalized", distributionModel.hospitalizedCases))
-            data.add(ValueDataEntry("Recovered", distributionModel.recoveredCases))
-            data.add(ValueDataEntry("Deaths", distributionModel.deaths))
-
-            pie.data(data)
-
-            pie.title("Cases Distribution")
-
-            pie.labels().position("outside")
-
-            pie.legend().title().enabled(true)
-
-            pie.legend()
-                .position("center-bottom")
-                .itemsLayout(LegendLayout.HORIZONTAL)
-                .align(Align.CENTER)
-
-            view.distribution_pie_chart.setChart(pie)
-        }
-
-
-        fun showTimelineGraph(timeFrequencyModel: GenericTimeFrequencyModel) {
-            val anyChartView = view.distribution_pie_chart
-            val cartesian: Cartesian = AnyChart.line()
-            cartesian.animation(true)
-            cartesian.padding(10.0, 20.0, 5.0, 20.0)
-            cartesian.crosshair().enabled(true)
-            cartesian.crosshair()
-                .yLabel(true) // TODO ystroke
-                .yStroke(null as Stroke?, null, null, null as String?, null as String?)
-            cartesian.tooltip().positionMode(TooltipPositionMode.POINT)
-            cartesian.title("Timeline of the identified coronavirus cases in india")
-            cartesian.yAxis(0).title("Confirmed Cases")
-            cartesian.xAxis(0).labels().padding(5.0, 5.0, 5.0, 5.0)
-            val seriesData: MutableList<DataEntry> = ArrayList()
-
-            timeFrequencyModel.cases.filterNotNull().forEach {
-                seriesData.add(CustomDataEntry(it.date, it.confirmedCases))
             }
-            val set: Set = Set.instantiate()
-            set.data(seriesData)
-            val series1Mapping: Mapping = set.mapAs("{ x: 'x', value: 'value' }")
-            val series1: Line = cartesian.line(series1Mapping)
-            series1.name("Identified Cases")
-            series1.hovered().markers().enabled(true)
-            series1.hovered().markers()
-                .type(MarkerType.CIRCLE)
-                .size(4.0)
+            // vertical grid lines
+            xAxis.enableGridDashedLine(10f, 10f, 0f)
+            val yAxis: YAxis
+            // // Y-Axis Style // //
+            yAxis = chart.axisLeft
 
-            series1.tooltip()
-                .position("right")
-                .anchor(Anchor.LEFT_CENTER)
-                .offsetX(5.0)
-                .offsetY(5.0)
+//             disable dual axis (only use LEFT axis)
+            chart.axisRight.isEnabled = false
 
-            cartesian.legend().enabled(true)
-            cartesian.legend().fontSize(13.0)
-            cartesian.legend().padding(0.0, 0.0, 10.0, 0.0)
-            anyChartView.setChart(cartesian)
+            // horizontal grid lines
+            yAxis.enableGridDashedLine(10f, 10f, 0f)
+
+            // axis range
+            yAxis.axisMaximum = confirmedData.last().toFloat()
+            yAxis.axisMinimum = 0f
+            // // Create Limit Lines // //
+            val llXAxis = LimitLine(9f, "Index 10")
+            llXAxis.lineWidth = 4f
+            llXAxis.enableDashedLine(10f, 10f, 0f)
+            llXAxis.labelPosition = LimitLine.LimitLabelPosition.LEFT_BOTTOM
+            llXAxis.textSize = 10f
+            val ll1 = LimitLine(150f, "Upper Limit")
+            ll1.lineWidth = 4f
+//            ll1.enableDashedLine(10f, 10f, 0f)
+            ll1.labelPosition = LimitLine.LimitLabelPosition.RIGHT_TOP
+            ll1.textSize = 10f
+            val ll2 = LimitLine(-30f, "Lower Limit")
+            ll2.lineWidth = 4f
+//            ll2.enableDashedLine(10f, 10f, 0f)
+            ll2.labelPosition = LimitLine.LimitLabelPosition.RIGHT_BOTTOM
+            ll2.textSize = 10f
+
+            val values = ArrayList<Entry>()
+
+            confirmedData.forEachIndexed { index, i ->
+                values.add(
+                    Entry(
+                        dates[index].toFloat(), i.toFloat()
+                    )
+                )
+            }
+
+            val set1: LineDataSet
+            if (chart.data != null &&
+                chart.data.dataSetCount > 0
+            ) {
+                set1 = chart.data.getDataSetByIndex(0) as LineDataSet
+                set1.values = values
+                set1.notifyDataSetChanged()
+                chart.data.notifyDataChanged()
+                chart.notifyDataSetChanged()
+            } else {
+                // create a dataset and give it a type
+                set1 = LineDataSet(values, "Confirmed Cases")
+                set1.setDrawIcons(false)
+
+                // draw dashed line
+                set1.enableDashedLine(10f, 5f, 0f)
+
+                // black lines and points
+                set1.color = Color.BLACK
+                set1.setCircleColor(Color.BLACK)
+
+                // line thickness and point size
+                set1.lineWidth = 1f
+                set1.circleRadius = 3f
+
+                // draw points as solid circles
+                set1.setDrawCircleHole(false)
+
+                // customize legend entry
+                set1.formLineWidth = 1f
+                set1.formLineDashEffect = DashPathEffect(floatArrayOf(10f, 5f), 0f)
+                set1.formSize = 15f
+
+                // text size of values
+                set1.valueTextSize = 9f
+
+                // draw selection line as dashed
+                set1.enableDashedHighlightLine(10f, 5f, 0f)
+
+                // set the filled area
+                set1.setDrawFilled(true)
+                set1.fillFormatter =
+                    IFillFormatter { _, _ -> chart.axisLeft.axisMinimum }
+
+                // drawables only supported on api level 18 and above
+                val drawable =
+                    ContextCompat.getDrawable(
+                        view.context,
+                        R.drawable.fade_red
+                    )
+                set1.fillDrawable = drawable
+
+                val dataSets = ArrayList<ILineDataSet>()
+                dataSets.add(set1) // add the data sets
+
+                // create a data object with the data sets
+                val data = LineData(dataSets)
+
+                // set data
+                chart.data = data
+            }
+            // draw points over time
+            chart.animateX(1500)
+
+            // get the legend (only possible after setting data)
+            val l = chart.legend
+
+            // draw legend entries as lines
+            l.form = Legend.LegendForm.LINE
         }
-        private inner class CustomDataEntry internal constructor(
-            x: String?,
-            value: Number?
-        ) : ValueDataEntry(x, value)
+
+        private fun generateCenterSpannableText(): SpannableString? {
+            val s = SpannableString("MPAndroidChart\ndeveloped by Philipp Jahoda")
+            s.setSpan(RelativeSizeSpan(1.5f), 0, 14, 0)
+            s.setSpan(StyleSpan(Typeface.NORMAL), 14, s.length - 15, 0)
+            s.setSpan(ForegroundColorSpan(Color.GRAY), 14, s.length - 15, 0)
+            s.setSpan(RelativeSizeSpan(.65f), 14, s.length - 15, 0)
+            s.setSpan(StyleSpan(Typeface.ITALIC), s.length - 14, s.length, 0)
+            s.setSpan(ForegroundColorSpan(ColorTemplate.getHoloBlue()), s.length - 14, s.length, 0)
+            return s
+
+        }
+
+        @SuppressLint("ViewConstructor")
+        inner class MyMarkerView(context: Context?, layoutResource: Int) :
+            MarkerView(context, layoutResource) {
+            private val tvContent: TextView = findViewById(R.id.tvContent)
+
+            // runs every time the MarkerView is redrawn, can be used to update the
+            // content (user-interface)
+            override fun refreshContent(
+                e: Entry,
+                highlight: Highlight
+            ) {
+                if (e is CandleEntry) {
+                    tvContent.text = Utils.formatNumber(
+                        e.high,
+                        0,
+                        true
+                    )
+                } else {
+                    tvContent.text = Utils.formatNumber(
+                        e.y,
+                        0,
+                        true
+                    )
+                }
+                super.refreshContent(e, highlight)
+            }
+
+            override fun getOffset(): MPPointF {
+                return MPPointF((-(width / 2)).toFloat(), (-height).toFloat())
+            }
+
+        }
+        
+        
     }
 }
-
-
-

@@ -1,6 +1,5 @@
 package com.udhay.helfycovid_19.ui.twitter
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,7 +10,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 
 import com.udhay.helfycovid_19.R
-import com.udhay.helfycovid_19.ui.home.TwitterRecyclerAdapter
 import com.udhay.helfycovid_19.util.Resource
 import kotlinx.android.synthetic.main.twitter_fragment.*
 import org.koin.android.ext.android.inject
@@ -45,6 +43,7 @@ class TwitterFragment : Fragment() {
             GridLayoutManager.HORIZONTAL
         )
         twitter_recycler_view.addItemDecoration(dividerItemDecoration)
-        twitter_recycler_view.adapter = TwitterRecyclerAdapter(feeds)
+        twitter_recycler_view.adapter =
+            TwitterRecyclerAdapter(feeds)
     }
 }
