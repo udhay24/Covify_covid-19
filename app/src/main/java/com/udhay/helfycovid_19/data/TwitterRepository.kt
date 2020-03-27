@@ -49,6 +49,6 @@ class TwitterRepository(
                 )
             }
         }
-        return Response.success(combinedTweets.sortedBy { it.createdAt })
+        return Response.success(combinedTweets.sortedByDescending { it.createdAt })
     }
 }

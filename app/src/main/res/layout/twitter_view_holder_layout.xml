@@ -42,13 +42,13 @@
             tools:text="Modi" />
 
         <TextView
-            android:layout_marginBottom="24dp"
             android:id="@+id/tweet_body_text_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="32dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="24dp"
             android:text="_"
             android:textColor="@color/textGrey"
             android:textSize="15sp"
@@ -95,11 +95,11 @@
             app:layout_constraintTop_toTopOf="@+id/tweet_body_text_view" />
 
         <TextView
-            android:background="@null"
             android:id="@+id/likes_count"
-            android:layout_width="48dp"
+            android:layout_width="0dp"
             android:layout_height="24dp"
             android:layout_marginEnd="24dp"
+            android:background="@null"
             android:drawableEnd="@drawable/icon_heart"
             android:drawablePadding="10dp"
             android:gravity="end"
