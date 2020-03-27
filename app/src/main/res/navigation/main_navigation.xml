@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.udhay.helfycovid_19.ui.home.HomeFragment"
+        android:name="com.udhay.helfy.ui.home.HomeFragment"
         android:label="HomeFragment" >
         <action
             android:id="@+id/action_homeFragment_to_mapDetailFragment"
@@ -27,36 +27,36 @@
     </fragment>
     <fragment
         android:id="@+id/mapDetailFragment"
-        android:name="com.udhay.helfycovid_19.ui.home.MapDetailFragment"
+        android:name="com.udhay.helfy.ui.home.MapDetailFragment"
         android:label="fragment_map_detail"
         tools:layout="@layout/fragment_map_detail" />
     <fragment
         android:id="@+id/detailCountryFragment"
-        android:name="com.udhay.helfycovid_19.ui.graph.GraphFragment"
+        android:name="com.udhay.helfy.ui.graph.GraphFragment"
         android:label="detail_country_fragment"
         tools:layout="@layout/graph_fragment" >
         <argument
             android:name="distributionData"
-            app:argType="com.udhay.helfycovid_19.data.model.GenericDistributionModel" />
+            app:argType="com.udhay.helfy.data.model.GenericDistributionModel" />
         <argument
             android:name="frequencyModel"
-            app:argType="com.udhay.helfycovid_19.data.model.GenericTimeFrequencyModel" />
+            app:argType="com.udhay.helfy.data.model.GenericTimeFrequencyModel" />
     </fragment>
     <fragment
         android:id="@+id/twitterFragment"
-        android:name="com.udhay.helfycovid_19.ui.twitter.TwitterFragment"
+        android:name="com.udhay.helfy.ui.twitter.TwitterFragment"
         android:label="twitter_fragment"
         tools:layout="@layout/twitter_fragment" />
 
     <fragment
         android:id="@+id/whoGuideLinesFragment"
-        android:name="com.udhay.helfycovid_19.ui.guidelines.WHOGuideLinesFragment"
+        android:name="com.udhay.helfy.ui.guidelines.WHOGuideLinesFragment"
         android:label="who_guidelines_fragment"
         tools:layout="@layout/fragment_who_guide_lines"/>
 
     <fragment
         android:id="@+id/errorFragment"
-        android:name="com.udhay.helfycovid_19.ui.error.ErrorFragment"
+        android:name="com.udhay.helfy.ui.error.ErrorFragment"
         android:label="error_fragment"
         tools:layout="@layout/fragment_error">
         <action

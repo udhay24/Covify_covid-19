@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.udhay.helfycovid_19">
+    package="com.udhay.helfy">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -14,10 +14,10 @@
         android:roundIcon="@drawable/ic_helfy"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name=".MainApplication">
+        android:name="com.udhay.helfy.MainApplication">
 
         <activity
-            android:name=".MainActivity"
+            android:name="com.udhay.helfy.MainActivity"
             android:label="@string/title_activity_maps"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
