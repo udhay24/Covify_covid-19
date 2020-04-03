@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.state_recycler_view_item.view.*
 import kotlinx.android.synthetic.main.state_recycler_view_item.view.cases_text_view
 
 class StatesRecyclerAdapter(
-    private val statesList: List<StateModel.StateModelItem>,
+    private var statesList: List<StateModel.StateModelItem>,
     private val stateClickListener: StateClickListener
 ): RecyclerView.Adapter<StatesRecyclerAdapter.StatesViewModel>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StatesViewModel {
@@ -21,15 +21,18 @@ class StatesRecyclerAdapter(
     override fun getItemCount(): Int = statesList.size
 
     override fun onBindViewHolder(holder: StatesViewModel, position: Int) {
-        holder.populateDetails(state = statesList[position], position = position)
+        val isHighest = statesList.maxBy {
+            it.confirmed_case
+        }?.confirmed_case == statesList[position].confirmed_case
+
+        holder.populateDetails(state = statesList[position], isHighest = isHighest)
     }
 
     inner class StatesViewModel(private val view: View): RecyclerView.ViewHolder(view) {
-        fun populateDetails(state: StateModel.StateModelItem, position: Int) {
+        fun populateDetails(state: StateModel.StateModelItem, isHighest: Boolean) {
 
             view.let {
-
-                if (position == 0) {
+                if (isHighest) {
                     it.constraint_Layout.background = it.context.getDrawable(R.drawable.state_card_gradient)
                     it.state_title_text_view.setTextColor(it.context.getColor(R.color.white))
                     it.cases_text_view.setTextColor(it.context.getColor(R.color.white))
@@ -72,6 +75,20 @@ class StatesRecyclerAdapter(
                 stateClickListener.stateClicked(state)
             }
         }
+    }
+
+    fun sortByName(){
+        statesList = statesList.sortedBy {
+            it.state
+        }
+        notifyDataSetChanged()
+    }
+
+    fun sortByCount() {
+        statesList = statesList.sortedByDescending {
+            it.confirmed_case
+        }
+        notifyDataSetChanged()
     }
 
     interface StateClickListener {

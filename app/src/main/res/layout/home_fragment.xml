@@ -219,6 +219,8 @@
                 android:id="@+id/states_constrain_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
                 <TextView
@@ -246,6 +248,18 @@
                     app:layout_constraintTop_toBottomOf="@+id/state_wise_title"
                     tools:itemCount="5"
                     tools:listitem="@layout/state_recycler_view_item" />
+
+                <ImageView
+                    android:id="@+id/sort_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintBottom_toTopOf="@+id/states_recycler_view"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_sort" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

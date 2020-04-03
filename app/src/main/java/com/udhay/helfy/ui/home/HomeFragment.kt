@@ -1,5 +1,7 @@
 package com.udhay.helfy.ui.home
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
@@ -116,6 +118,18 @@ class HomeFragment : Fragment(), StatesRecyclerAdapter.StateClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_whoGuideLinesFragment)
         }
 
+        sort_icon.setOnClickListener {
+            if (states_recycler_view.adapter is StatesRecyclerAdapter) {
+                val sharedPreference = requireActivity().getSharedPreferences("Helfy", Context.MODE_PRIVATE)
+                if (sharedPreference.getBoolean(SORTED_BY_CASES, true)) {
+                    (states_recycler_view.adapter as StatesRecyclerAdapter).sortByName() //currently sorted by cases change to name
+                    sharedPreference.edit().putBoolean(SORTED_BY_CASES, false).apply()
+                } else {
+                    (states_recycler_view.adapter as StatesRecyclerAdapter).sortByCount() //currently sorted by cases change to name
+                    sharedPreference.edit().putBoolean(SORTED_BY_CASES, true).apply()
+                }
+            }
+        }
     }
 
     private fun updateCountryInfo(countryModel: CountryModel.CountryModelItem) {
@@ -183,5 +197,9 @@ class HomeFragment : Fragment(), StatesRecyclerAdapter.StateClickListener {
             distributionModel, timeFrequencyModel
         )
         findNavController().navigate(navOptions)
+    }
+
+    companion object {
+        const val SORTED_BY_CASES = "sort_by_cases"
     }
 }
