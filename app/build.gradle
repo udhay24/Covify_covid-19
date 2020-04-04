@@ -121,4 +121,11 @@ dependencies {
     //carousel view
     implementation 'com.synnapps:carouselview:0.1.5'
 
+    //firestore
+    implementation 'com.google.firebase:firebase-firestore-ktx:21.4.2'
+
+    //to solve dependency issue
+    implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
+
+
 }
