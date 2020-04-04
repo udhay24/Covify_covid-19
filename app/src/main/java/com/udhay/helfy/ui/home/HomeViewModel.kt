@@ -3,6 +3,7 @@ package com.udhay.helfy.ui.home
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
 import com.udhay.helfy.data.CasesRepository
 import com.udhay.helfy.data.model.CountryModel
 import com.udhay.helfy.data.model.StateModel
@@ -33,6 +34,12 @@ class HomeViewModel(
 
     val stateCount: MutableLiveData<Resource<StateModel, Exception>> = MutableLiveData()
 
+    val appUpdate = liveData {
+        val update = casesRepository.fetchCurrentVersion()
+        if (update.isSuccessful and (update.body() != null)) {
+            emit(update.body()!!)
+        }
+    }
     fun retryData() {
         launch(exceptionHandler) {
             postCountryData()

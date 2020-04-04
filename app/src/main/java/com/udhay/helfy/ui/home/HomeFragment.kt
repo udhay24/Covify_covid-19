@@ -1,7 +1,6 @@
 package com.udhay.helfy.ui.home
 
-import android.content.Context
-import android.content.SharedPreferences
+import android.content.*
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
@@ -19,7 +18,9 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.udhay.helfy.BuildConfig
 import com.udhay.helfy.R
 import com.udhay.helfy.data.model.CountryModel
 import com.udhay.helfy.data.model.GenericDistributionModel
@@ -130,6 +131,22 @@ class HomeFragment : Fragment(), StatesRecyclerAdapter.StateClickListener {
                 }
             }
         }
+
+        viewModel.appUpdate.observe(viewLifecycleOwner, Observer { appUpdate ->
+            val versionCode = BuildConfig.VERSION_CODE
+
+            if (appUpdate.currentVersion > versionCode) {
+                Snackbar.make(view, "A new version of the app is found", Snackbar.LENGTH_LONG)
+                    .setAction("Update") {
+                        val uri = Uri.parse(appUpdate.downloadUrl)
+
+                        val intent = Intent(Intent.ACTION_VIEW)
+                        intent.data = uri
+                        startActivity(intent)
+                    }
+                    .show()
+            }
+        })
     }
 
     private fun updateCountryInfo(countryModel: CountryModel.CountryModelItem) {
