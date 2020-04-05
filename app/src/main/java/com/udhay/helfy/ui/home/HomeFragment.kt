@@ -119,6 +119,10 @@ class HomeFragment : Fragment(), StatesRecyclerAdapter.StateClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_whoGuideLinesFragment)
         }
 
+        help_line_card.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_helplineFragment)
+        }
+
         sort_icon.setOnClickListener {
             if (states_recycler_view.adapter is StatesRecyclerAdapter) {
                 val sharedPreference = requireActivity().getSharedPreferences("Helfy", Context.MODE_PRIVATE)

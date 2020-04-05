@@ -1,4 +1,4 @@
-package com.udhay.helfy.ui.home
+package com.udhay.helfy.ui.help
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,18 +8,16 @@ import android.view.ViewGroup
 import com.google.gson.Gson
 import com.udhay.helfy.R
 import com.udhay.helfy.data.model.HelplineModel
-import com.udhay.helfy.ui.guidelines.HelpLineadapter
 import kotlinx.android.synthetic.main.fragment_helpline.*
 
 class HelplineFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val helplineData = Gson().fromJson<HelplineModel>(getHelpData(),HelplineModel::class.java)
-        val adapter = HelpLineadapter(helplineData.data)
+        val adapter = HelpLineAdapter(helplineData.data)
         helpline_rc.adapter = adapter
-
     }
 
     override fun onCreateView(

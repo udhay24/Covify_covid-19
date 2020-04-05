@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.udhay.helfy.ui.home.HelplineFragment">
+    tools:context="com.udhay.helfy.ui.help.HelplineFragment">
 
     <TextView
         android:textSize="18sp"

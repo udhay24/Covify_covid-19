@@ -6,39 +6,42 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:stateListAnimator="@animator/click_animation"
         android:id="@+id/guideline_card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="4dp"
-        android:minHeight="170dp"
-        app:cardCornerRadius="8dp"
         android:maxHeight="200dp"
+        android:minHeight="170dp"
+        android:stateListAnimator="@animator/click_animation"
+        app:cardCornerRadius="8dp"
         app:layout_constraintDimensionRatio="w,1:1"
         app:layout_constraintEnd_toStartOf="@+id/world_map_card"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <ImageView
-                android:padding="20dp"
-                app:srcCompat="@drawable/icon_correct"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_margin="16dp"/>
+                android:layout_margin="16dp"
+                android:padding="20dp"
+                app:srcCompat="@drawable/icon_correct" />
+
             <TextView
-                android:textStyle="bold"
-                android:textColor="@color/textGrey"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:text="WHO Guide lines"
-                android:layout_gravity="center_horizontal"/>
+                android:textColor="@color/textGrey"
+                android:textStyle="bold" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -56,107 +59,160 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/guideline_card"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <ImageView
-                android:padding="10dp"
-                app:srcCompat="@drawable/icon_world"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_margin="16dp"/>
+                android:layout_margin="16dp"
+                android:padding="10dp"
+                app:srcCompat="@drawable/icon_world" />
+
             <TextView
-                android:textColor="@color/textGrey"
-                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:text="World Map"
-                android:layout_gravity="center_horizontal"/>
+                android:textColor="@color/textGrey"
+                android:textStyle="bold" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:layout_marginBottom="40dp"
         android:id="@+id/twitter_card"
         android:layout_width="0dp"
-        app:cardCornerRadius="8dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="4dp"
+        android:layout_marginBottom="40dp"
         android:minHeight="170dp"
         android:stateListAnimator="@animator/click_animation"
+        app:cardCornerRadius="8dp"
         app:layout_constraintDimensionRatio="w,1:1"
         app:layout_constraintEnd_toStartOf="@+id/self_assesment_card"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline_card" >
+        app:layout_constraintTop_toBottomOf="@+id/guideline_card">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <ImageView
-                app:srcCompat="@drawable/icon_hashtag"
-                android:tint="@color/purple"
-                android:padding="20dp"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_margin="16dp"/>
+                android:layout_margin="16dp"
+                android:padding="20dp"
+                android:tint="@color/purple"
+                app:srcCompat="@drawable/icon_hashtag" />
+
             <TextView
-                android:textStyle="bold"
-                android:textColor="@color/textGrey"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:text="Latest Tweets"
-                android:layout_gravity="center_horizontal"/>
+                android:textColor="@color/textGrey"
+                android:textStyle="bold" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:layout_marginBottom="40dp"
-        android:stateListAnimator="@animator/click_animation"
         android:id="@+id/self_assesment_card"
         android:layout_width="0dp"
-        app:cardCornerRadius="8dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginBottom="40dp"
         android:minHeight="170dp"
+        android:stateListAnimator="@animator/click_animation"
+        app:cardCornerRadius="8dp"
         app:layout_constraintDimensionRatio="w,1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/twitter_card"
-        app:layout_constraintTop_toBottomOf="@+id/world_map_card" >
+        app:layout_constraintTop_toBottomOf="@+id/world_map_card">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <ImageView
-                android:padding="10dp"
-                android:tint="@color/purple"
-                app:srcCompat="@drawable/icon_test"
                 android:layout_width="75dp"
                 android:layout_height="85dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_margin="16dp"/>
+                android:layout_margin="16dp"
+                android:padding="10dp"
+                android:tint="@color/purple"
+                app:srcCompat="@drawable/icon_test" />
+
             <TextView
-                android:textColor="@color/textGrey"
-                android:textStyle="bold"
-                android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Covid-19 Self-Assessment"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:textAlignment="center"/>
+                android:text="Covid-19 Self-Assessment"
+                android:textAlignment="center"
+                android:textColor="@color/textGrey"
+                android:textSize="16sp"
+                android:textStyle="bold" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/help_line_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="8dp"
+        android:minHeight="170dp"
+        android:stateListAnimator="@animator/click_animation"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="w,1:1"
+        app:layout_constraintEnd_toStartOf="@+id/self_assesment_card"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/twitter_card">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="75dp"
+                android:layout_height="85dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="16dp"
+                android:padding="10dp"
+                android:tint="@color/purple"
+                app:srcCompat="@drawable/ic_24_7" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="Help Line"
+                android:textAlignment="center"
+                android:textColor="@color/textGrey"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

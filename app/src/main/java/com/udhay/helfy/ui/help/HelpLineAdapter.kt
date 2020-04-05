@@ -1,4 +1,4 @@
-package com.udhay.helfy.ui.guidelines
+package com.udhay.helfy.ui.help
 
 import android.Manifest
 import android.content.Intent
@@ -8,15 +8,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.udhay.helfy.R
 import com.udhay.helfy.data.model.HelplineModel
 import kotlinx.android.synthetic.main.helpline_item.view.*
 
 
-class HelpLineadapter(
-    private val statesList: List<HelplineModel.State>): RecyclerView.Adapter<HelpLineadapter.HelpLineViewModel>() {
+class HelpLineAdapter(
+    private val statesList: List<HelplineModel.State>
+): RecyclerView.Adapter<HelpLineAdapter.HelpLineViewModel>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HelpLineViewModel {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.helpline_item, parent, false)
         return HelpLineViewModel(view)

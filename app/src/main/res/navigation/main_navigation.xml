@@ -24,6 +24,9 @@
         <action
             android:id="@+id/action_homeFragment_to_errorFragment"
             app:destination="@id/errorFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_helplineFragment"
+            app:destination="@id/helplineFragment" />
     </fragment>
     <fragment
         android:id="@+id/mapDetailFragment"
@@ -65,5 +68,10 @@
             app:popUpTo="@id/errorFragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/helplineFragment"
+        android:name="com.udhay.helfy.ui.help.HelplineFragment"
+        android:label="fragment_helpline"
+        tools:layout="@layout/fragment_helpline" />
 
 </navigation>
