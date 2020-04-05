@@ -18,6 +18,7 @@ The App can be downloaded for FREE from the Google PlayStores. It gives you a co
 
 Be Safe. Be Home
 
-The app is developed by Gaurav Rai, Rinkesh Gorasia of SRM IST, Chennai and Udhaya Kumar of Hindustan University. The students volunteered with the RAJ SQUARE CHARITY FOUNDATION to help people learn and get aware on the ongoing pandemic COVID-19. 
+The app is developed by Gaurav Rai, Rinkesh Gorasia of SRM IST, Chennai and Udhaya Kumar of Hindustan University. The students volunteered with the [RAJ SQUARE CHARITY FOUNDATION](https://www.rajsquare.com) to help people learn and get aware on the ongoing pandemic COVID-19.
+
 
 Build with love by Team Dev Dost ❤
