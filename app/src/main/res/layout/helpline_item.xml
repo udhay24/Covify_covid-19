@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:elevation="2dp"
+    android:layout_marginStart="15dp"
+    android:layout_marginEnd="15dp"
+    android:layout_marginTop="15dp"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:paddingBottom="15dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_margin="10dp"
+            android:textSize="16sp"
+            android:letterSpacing="0.01"
+            android:textColor="@color/textGrey"
+            android:textStyle="bold"
+            android:id="@+id/state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tool:text="Maharashtra" />
+
+        <TextView
+            android:drawablePadding="3dp"
+            android:gravity="top"
+            android:drawableTint="@color/purple"
+            android:drawableLeft="@drawable/icon_call"
+            android:layout_marginStart="15dp"
+            android:textSize="16sp"
+            android:letterSpacing="0.01"
+            android:textColor="@color/purple"
+            android:id="@+id/helpline1"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            tool:text="Maharashtra" />
+
+        <TextView
+            android:visibility="gone"
+            android:drawablePadding="3dp"
+            android:gravity="top"
+            android:drawableTint="@color/purple"
+            android:drawableLeft="@drawable/icon_call"
+            android:layout_marginStart="15dp"
+            android:textSize="16sp"
+            android:letterSpacing="0.01"
+            android:textColor="@color/purple"
+            android:id="@+id/helpline2"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            tool:text="Maharashtra" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
