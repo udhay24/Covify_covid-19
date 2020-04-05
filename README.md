@@ -2,7 +2,6 @@
 
 [Click on .Apk file (latest version) and install in your phone.](https://github.com/udhay24/helfy_covid-19/releases)
 
-![demo picture](https://github.com/udhay24/Covify_covid-19/blob/master/Figures/Image1.jpeg)
 
 <img align="left" src="https://github.com/udhay24/Covify_covid-19/blob/master/Figures/Image1.jpeg" height=500>
 
