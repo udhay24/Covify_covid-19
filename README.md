@@ -4,7 +4,7 @@
 
 Covify helps you keep track of the latest information regarding the ongoing pandemic coronavirus disease “COVID-19”. 
 
-The App can be downloaded for FREE from the Google PlayStores. It gives you a comprehensive overview of the tally of cases and other relevant info from the World Health Organisation (WHO), the Health Ministry of India and top tweets from the officials to keep you updated about the COVID -19. 
+The App can be downloaded for FREE from the link provided above. It gives you a comprehensive overview of the tally of cases and other relevant info from the World Health Organisation (WHO), the Health Ministry of India and top tweets from the officials to keep you updated about the COVID -19. 
 
 ## Features of Covify 
 
