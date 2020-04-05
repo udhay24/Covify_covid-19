@@ -2,8 +2,7 @@
 
 [Click on .Apk file (latest version) and install in your phone.](https://github.com/udhay24/helfy_covid-19/releases)
 
-![demo picture](https://github.com/udhay24/Covify_covid-19/blob/master/Figures/Image1.jpeg){:height="700px" width="400px"}
-![demo picture](https://github.com/udhay24/Covify_covid-19/blob/master/Figures/IMage2.jpeg){:height="700px" width="400px"}
+![demo picture](https://github.com/udhay24/Covify_covid-19/blob/master/Figures/Image1.jpeg)
 
 Covify helps you keep track of the latest information regarding the ongoing pandemic coronavirus disease “COVID-19”. 
 
