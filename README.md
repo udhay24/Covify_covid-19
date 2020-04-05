@@ -4,7 +4,7 @@
 
 ![demo picture](https://github.com/udhay24/Covify_covid-19/blob/master/Figures/Image1.jpeg)
 
-<img align="right" src="https://github.com/udhay24/Covify_covid-19/blob/master/Figures/Image1.jpeg" height=100>
+<img align="left" src="https://github.com/udhay24/Covify_covid-19/blob/master/Figures/Image1.jpeg" height=500>
 
 Covify helps you keep track of the latest information regarding the ongoing pandemic coronavirus disease “COVID-19”. 
 
