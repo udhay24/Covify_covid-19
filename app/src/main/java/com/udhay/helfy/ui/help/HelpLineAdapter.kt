@@ -7,6 +7,7 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.udhay.helfy.R
@@ -15,7 +16,7 @@ import kotlinx.android.synthetic.main.helpline_item.view.*
 
 
 class HelpLineAdapter(
-    private val statesList: List<HelplineModel.State>
+    private val statesList: List<HelplineModel.Data>
 ): RecyclerView.Adapter<HelpLineAdapter.HelpLineViewModel>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HelpLineViewModel {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.helpline_item, parent, false)
@@ -25,11 +26,11 @@ class HelpLineAdapter(
     override fun getItemCount(): Int = statesList.size
 
     override fun onBindViewHolder(holder: HelpLineViewModel, position: Int) {
-        holder.populateDetails(state = statesList[position], position = position)
+        holder.populateDetails(state = statesList[position].state, position = position)
     }
 
     inner class HelpLineViewModel(private val view: View): RecyclerView.ViewHolder(view) {
-        fun populateDetails(state: HelplineModel.State, position: Int) {
+        fun populateDetails(state: HelplineModel.Data.State, position: Int) {
 
             view.let {
 
@@ -39,11 +40,13 @@ class HelpLineAdapter(
                     if (ActivityCompat.checkSelfPermission(
                             view.context,
                             Manifest.permission.CALL_PHONE
-                        ) != PackageManager.PERMISSION_GRANTED
+                        ) == PackageManager.PERMISSION_GRANTED
                     ) {
                         val callIntent = Intent(Intent.ACTION_CALL)
                         callIntent.data = Uri.parse("tel:${state.helpline[0]}")
                         view.context.startActivity(callIntent)
+                    } else {
+                        Toast.makeText(view.context, "Call Permission not granted", Toast.LENGTH_SHORT).show()
                     }
                 }
                 if(state.helpline.size>1) {
@@ -54,11 +57,13 @@ class HelpLineAdapter(
                         if (ActivityCompat.checkSelfPermission(
                                 view.context,
                                 Manifest.permission.CALL_PHONE
-                            ) != PackageManager.PERMISSION_GRANTED
+                            ) == PackageManager.PERMISSION_GRANTED
                         ) {
                             val callIntent = Intent(Intent.ACTION_CALL)
                             callIntent.data = Uri.parse("tel:${state.helpline[1]}")
                             view.context.startActivity(callIntent)
+                        } else {
+                            Toast.makeText(view.context, "Call Permission not granted", Toast.LENGTH_SHORT).show()
                         }
                     }
 
