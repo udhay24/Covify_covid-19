@@ -1,6 +1,7 @@
 # COVIFY Android App for COVID-2019
 
-[Click on .Apk file (latest version) and install in your phone.](https://github.com/udhay24/helfy_covid-19/releases)
+
+Andriod - Download the latest APK from [here](https://github.com/udhay24/Covify_covid-19/releases/download/v1.0/app-release.apk) to install the application.
 
 
 <img align="left" src="https://github.com/udhay24/Covify_covid-19/blob/master/Figures/Image1.jpeg" height=500>
