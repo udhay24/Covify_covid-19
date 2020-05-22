@@ -3,6 +3,8 @@
 
 Download the latest APK from [here](https://github.com/udhay24/Covify_covid-19/releases/download/v1.0/app-release.apk) to install the application.
 
+<td align="center"><a href="https://github.com/udhay24/Covify_covid-19/releases/download/v1.0/app-release.apk"><img src="https://user-images.githubusercontent.com/663460/26973090-f8fdc986-4d14-11e7-995a-e7c5e79ed925.png" alt="Get it on Github" height="68"></a></td>
+
 
 <img align="left" src="https://github.com/udhay24/Covify_covid-19/blob/master/Figures/Image1.jpeg" height=500>
 
